@@ -690,6 +690,12 @@
           }
         });
         currentLang = lang;
+        localStorage.setItem('langPref', lang);
+      }
+
+      var savedLang = localStorage.getItem('langPref');
+      if (savedLang && savedLang !== currentLang) {
+        applyLang(savedLang);
       }
 
       langToggle.addEventListener('click', function() {
