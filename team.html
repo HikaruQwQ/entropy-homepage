@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>团队 · _entropy 熵序</title>
+  <meta name="description" content="_entropy 熵序团队成员介绍。">
+  <meta name="theme-color" content="#0B0B0B">
+  <meta property="og:title" content="团队 · _entropy 熵序">
+  <meta property="og:description" content="_entropy 熵序团队成员介绍">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.cn">
+  <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
+  <link href="https://fonts.googleapis.cn/css2?family=Barlow:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0B0B0B;
+      --color-bg-card: #000000;
+      --color-text: #FFFFFF;
+      --color-text-muted: rgba(255,255,255,0.5);
+      --color-text-dim: rgba(255,255,255,0.2);
+      --color-accent: #B3E4FF;
+      --color-border: rgba(255,255,255,0.2);
+      --font-en: 'Barlow', sans-serif;
+      --font-cn: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --container-max: 1920px;
+      --container-pad: 40px;
+      --radius: 10px;
+      --transition: 0.3s ease;
+      --logo-filter: none;
+    }
+    [data-theme="light"] {
+      --color-bg: #F5F5F5;
+      --color-bg-card: #FFFFFF;
+      --color-text: #000000;
+      --color-text-muted: rgba(0,0,0,0.5);
+      --color-text-dim: rgba(0,0,0,0.2);
+      --color-accent: #0070B8;
+      --color-border: rgba(0,0,0,0.15);
+      --logo-filter: invert(1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-cn);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+      -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+    }
+    h1, h2, h3, h4, p { margin: 0; }
+    img { display: block; max-width: 100%; height: auto; -webkit-user-drag: none; user-drag: none; }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+    .eyebrow {
+      font-size: clamp(14px, 1.3vw, 24px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--color-text-dim);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-cn);
+      font-size: clamp(28px, 4vw, 58px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .section-alt { background: rgba(255,255,255,0.02); }
+    [data-theme="light"] .section-alt { background: rgba(0,0,0,0.02); }
+    .reveal { will-change: opacity, transform; }
+
+    /* 导航 */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      transition: background var(--transition);
+    }
+    .nav.scrolled {
+      background: rgba(11,11,11,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .nav.scrolled { background: rgba(245,245,245,0.85); }
+    [data-theme="light"] .nav { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .nav-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 20px var(--container-pad);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img {
+      height: 40px; width: auto;
+      filter: var(--logo-filter);
+      transition: filter var(--transition);
+    }
+    .nav-links {
+      display: flex; align-items: center;
+      gap: clamp(16px, 2vw, 40px);
+      margin-left: auto;
+    }
+    .nav-link {
+      font-family: var(--font-en);
+      font-size: clamp(14px, 1vw, 18px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      position: relative;
+      padding: 4px 0;
+      opacity: 0.5;
+      transition: opacity 0.4s ease;
+    }
+    .nav-link:hover { opacity: 0.8; transform: translateY(-1px); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .lang-toggle {
+      font-family: var(--font-en);
+      font-size: clamp(12px, 0.9vw, 16px);
+      font-weight: 500;
+      color: var(--color-text);
+      opacity: 0.4;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity var(--transition);
+    }
+    .lang-toggle:hover { opacity: 0.8; }
+    .theme-toggle {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--color-text);
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      transition: border-color var(--transition);
+      flex-shrink: 0;
+    }
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 1px; left: 5px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      transition: transform var(--transition);
+    }
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(-4px);
+      width: 12px; height: 12px;
+    }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-burger span { width: 24px; height: 2px; background: var(--color-text); transition: var(--transition); }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* 团队页 Hero */
+    .team-hero {
+      padding-top: clamp(140px, 18vh, 200px);
+      padding-bottom: clamp(40px, 6vh, 80px);
+    }
+    .team-hero-title {
+      font-family: var(--font-cn);
+      font-size: clamp(36px, 7vw, 96px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: clamp(16px, 2vh, 28px);
+    }
+    .team-hero-body {
+      font-size: clamp(16px, 1.6vw, 28px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 820px;
+    }
+
+    /* 分组 */
+    .team-group { padding: clamp(60px, 8vh, 120px) 0; }
+    .team-group-header { margin-bottom: clamp(32px, 4vh, 56px); }
+    .team-group-label {
+      font-family: var(--font-en);
+      font-size: clamp(13px, 1.1vw, 18px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--color-accent);
+      margin-bottom: 10px;
+    }
+    .team-group-title {
+      font-family: var(--font-cn);
+      font-size: clamp(26px, 3.4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .team-group-desc {
+      font-size: clamp(15px, 1.4vw, 22px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 760px;
+    }
+
+    /* 成员网格 */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(8px, 1vw, 16px);
+      max-width: 1200px;
+    }
+    .team-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: clamp(8px, 1vw, 14px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .team-card-avatar {
+      flex-shrink: 0;
+    }
+    .team-card-info {
+      flex: 1;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-accent);
+    }
+    .team-card-avatar {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--color-text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-card-avatar svg { width: 24%; height: 24%; opacity: 0.5; }
+    .team-card-avatar.avatar-empty::after {
+      content: '_';
+      font-family: var(--font-en);
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 500;
+      color: var(--color-text-dim);
+      opacity: 0.6;
+    }
+    .team-card-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .team-card:hover .team-card-avatar img { transform: scale(1.08); }
+    .team-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: clamp(6px, 0.8vw, 10px) clamp(10px, 1vw, 14px) clamp(10px, 1vw, 14px);
+      margin-top: clamp(6px, 0.8vw, 8px);
+      border-top: 1px solid var(--color-border);
+      min-height: clamp(56px, 7vw, 84px);
+    }
+    .team-card-name {
+      font-family: var(--font-cn);
+      font-size: clamp(13px, 1vw, 16px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .team-card-tagline {
+      font-size: clamp(10px, 0.85vw, 12px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 返回首页 */
+    .team-back {
+      padding: clamp(60px, 8vh, 100px) 0;
+      text-align: center;
+    }
+    .team-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-en);
+      font-size: clamp(15px, 1.3vw, 20px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      opacity: 0.6;
+      padding: 14px 28px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      transition: opacity var(--transition), transform 0.3s ease, border-color var(--transition);
+    }
+    .team-back-link:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      border-color: var(--color-accent);
+    }
+
+    /* 页脚 */
+    .footer {
+      background: var(--color-bg);
+      padding: clamp(40px, 6vh, 80px) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .footer-copyright {
+      font-size: clamp(12px, 1vw, 16px);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+    .footer-link {
+      font-size: clamp(12px, 1vw, 16px);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--color-text); transform: translateY(-1px); }
+    .footer-disclaimer {
+      font-size: clamp(10px, 0.8vw, 12px);
+      font-weight: 400;
+      color: var(--color-text-dim);
+      text-align: center;
+      line-height: 1.7;
+      max-width: 720px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* 回到顶部 */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--color-text);
+      color: var(--color-bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), transform 0.3s ease;
+      z-index: 99;
+    }
+    .scroll-top:hover { transform: translateY(-3px); }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+    @media (max-width: 900px) {
+      .nav-links, .nav-burger { display: none; }
+      .nav-actions { display: flex; gap: 12px; margin-left: auto; }
+      .lang-toggle { font-size: 13px; }
+      .theme-toggle { width: 22px; height: 22px; }
+      .theme-toggle::before { top: 1px; left: 4px; width: 14px; height: 14px; }
+      [data-theme="light"] .theme-toggle::before { transform: translateX(-3px); width: 10px; height: 10px; }
+      .nav-inner { padding: 10px 16px; gap: 12px; }
+      .nav-logo img { height: 26px; }
+    }
+    @media (min-width: 768px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1280px) {
+      .team-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (min-width: 1920px) {
+      .team-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    @media (max-width: 375px) {
+      :root { --container-pad: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Entropy">
+        <img src="assets/entropy_logo.svg" alt="Entropy">
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="主导航">
+        <a href="index.html#home" class="nav-link" data-i18n="home">Home</a>
+        <a href="index.html#about" class="nav-link" data-i18n="about">About</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="lang-toggle" id="langToggle" role="button" tabindex="0" aria-label="切换语言">中/EN</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题"></button>
+        <div class="nav-burger" id="navBurger" role="button" tabindex="0" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="team-hero">
+      <div class="container">
+        <p class="eyebrow reveal" data-i18n="teamLabel">团队</p>
+        <h1 class="team-hero-title reveal" data-i18n="teamTitle">同频共振</h1>
+        <p class="team-hero-body reveal" data-i18n="teamBody">任何一个伟大的事业都不可能一个人完成。这里是一群愿意每周投入十几个小时、为同一个愿景坚持的年轻人。</p>
+      </div>
+    </section>
+
+    <section class="team-group section-alt">
+      <div class="container">
+        <div class="team-group-header reveal">
+          <p class="team-group-label">/Core Team</p>
+          <h2 class="team-group-title" data-i18n="group1Title">核心团队</h2>
+          <p class="team-group-desc" data-i18n="group1Desc">承载熵序愿景的核心成员，定义方向、统筹全局，让组织持续向前。</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/IMG_0026.JPEG" alt="许白" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m1Name">许白</h3>
+              <p class="team-card-tagline" data-i18n="m1Tag">请我解决问题只需要给我买瓶白色魔爪。</p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/F6UvP_Lk.jpg" alt="踪天朔" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m6Name">踪天朔</h3>
+              <p class="team-card-tagline" data-i18n="m6Tag" style="display:none"></p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/mmexport1783774558948.jpg" alt="比尔" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m7Name">比尔</h3>
+              <p class="team-card-tagline" data-i18n="m7Tag" style="display:none"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-group">
+      <div class="container">
+        <div class="team-group-header reveal">
+          <p class="team-group-label">/Tech &amp; Design Team</p>
+          <h2 class="team-group-title" data-i18n="group2Title">技术与设计团队</h2>
+          <p class="team-group-desc" data-i18n="group2Desc">用代码构建数字世界的基础设施，用视觉语言守护品牌秩序——搭建网站、开发功能、设计界面，为参与者提供顺畅可靠的体验。</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/1786002194999.jpeg" alt="Lonely" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m2Name">Lonely</h3>
+              <p class="team-card-tagline" data-i18n="m2Tag">我是秦始皇，vivo50看看实力</p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/1755440975063.jpeg" alt="Cherry Zhu" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m3Name">Cherry Zhu</h3>
+              <p class="team-card-tagline" data-i18n="m3Tag">愿未来的某一天能够与你再次相遇。</p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/mmexport1786004098313.jpg" alt="Evan Tee" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m5Name">Evan Tee</h3>
+              <p class="team-card-tagline" data-i18n="m5Tag">点燃篝火</p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/ar.jpg" alt="Ariakage" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m12Name">Ariakage</h3>
+              <p class="team-card-tagline" data-i18n="m12Tag" style="display:none"></p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/1786007031670.jpg" alt="Rechrd" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m9Name">Rechrd</h3>
+              <p class="team-card-tagline" data-i18n="m9Tag" style="display:none"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-group section-alt">
+      <div class="container">
+        <div class="team-group-header reveal">
+          <p class="team-group-label">/Biz &amp; Legal Team</p>
+          <h2 class="team-group-title" data-i18n="group3Title">法务及商务团队</h2>
+          <p class="team-group-desc" data-i18n="group3Desc">守护组织的合规与商业边界，处理合同、合作与法律事务，让一切在秩序中运行。</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/mmexport1717774465091.jpg" alt="杨景铄" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m4Name">杨景铄</h3>
+              <p class="team-card-tagline" data-i18n="m4Tag">喜欢您来</p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/1786006726932.jpg" alt="流萤" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m8Name">流萤</h3>
+              <p class="team-card-tagline" data-i18n="m8Tag" style="display:none"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-group section-alt">
+      <div class="container">
+        <div class="team-group-header reveal">
+          <p class="team-group-label">/Consultants</p>
+          <h2 class="team-group-title" data-i18n="group5Title">顾问与外包</h2>
+          <p class="team-group-desc" data-i18n="group5Desc">在专业领域提供外部支持与咨询，以灵活的方式为团队补充关键能力。</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/mmexport1786006880805.jpg" alt="天街下小雨" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m10Name">天街下小雨</h3>
+              <p class="team-card-tagline" data-i18n="m10Tag" style="display:none"></p>
+            </div>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-card-avatar"><img src="assets/team/OIP.gr3vp5KBMf9wj6DhLdCupQAAAA.jpg" alt="Xydia" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-info">
+              <h3 class="team-card-name" data-i18n="m11Name">Xydia</h3>
+              <p class="team-card-tagline" data-i18n="m11Tag" style="display:none"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-back">
+      <div class="container">
+        <a href="index.html" class="team-back-link reveal" data-i18n="backHome">← 返回首页</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copyright">© 2026 熵序前言（上海）教育科技有限公司. All Rights Reserved.</p>
+        <a href="https://beian.miit.gov.cn/" class="footer-link" target="_blank" rel="noopener">沪ICP备2026033811号</a>
+        <p class="footer-disclaimer" data-i18n="disclaimer">免责声明：本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="回到顶部">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="assets/gsap.min.js"></script>
+  <script src="assets/ScrollTrigger.min.js"></script>
+  <script src="assets/ScrollToPlugin.min.js"></script>
+  <script src="assets/lenis.min.js"></script>
+
+  <script>
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+    if (window.Lenis) {
+      var lenis = new Lenis({
+        duration: 1.1,
+        easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        smoothWheel: true
+      });
+      window.__lenis = lenis;
+      lenis.on('scroll', function() { if (window.ScrollTrigger) ScrollTrigger.update(); });
+      gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    (function() {
+      var themeToggle = document.getElementById('themeToggle');
+      var langToggle = document.getElementById('langToggle');
+      var nav = document.getElementById('nav');
+      var scrollTopBtn = document.getElementById('scrollTop');
+      var currentLang = 'zh';
+
+      var savedTheme = localStorage.getItem('themePref');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+
+      window.addEventListener('scroll', function() {
+        var y = window.scrollY;
+        if (y > 60) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+        if (y > 400) { scrollTopBtn.classList.add('visible'); } else { scrollTopBtn.classList.remove('visible'); }
+      });
+
+      var i18n = {
+        zh: {
+          home: 'Home', about: 'About',
+          teamLabel: '团队',
+          teamTitle: '同频共振',
+          teamBody: '任何一个伟大的事业都不可能一个人完成。这里是一群愿意每周投入十几个小时、为同一个愿景坚持的年轻人。',
+          group1Title: '核心团队', group1Desc: '承载熵序愿景的核心成员，定义方向、统筹全局，让组织持续向前。',
+          group2Title: '技术与设计团队', group2Desc: '用代码构建数字世界的基础设施，用视觉语言守护品牌秩序——搭建网站、开发功能、设计界面，为参与者提供顺畅可靠的体验。',
+          group3Title: '法务及商务团队', group3Desc: '守护组织的合规与商业边界，处理合同、合作与法律事务，让一切在秩序中运行。',
+          group5Title: '顾问与外包', group5Desc: '在专业领域提供外部支持与咨询，以灵活的方式为团队补充关键能力。',
+          m1Name: '许白', m1Tag: '请我解决问题只需要给我买瓶白色魔爪。',
+          m2Name: 'Lonely', m2Tag: '我是秦始皇，vivo50看看实力',
+          m3Name: 'Cherry Zhu', m3Tag: '愿未来的某一天能够与你再次相遇。',
+          m4Name: '杨景铄', m4Tag: '喜欢您来',
+          m5Name: 'Evan Tee', m5Tag: '点燃篝火',
+          m6Name: '踪天朔', m6Tag: '',
+          m7Name: '比尔', m7Tag: '',
+          m8Name: '流萤', m8Tag: '',
+          m9Name: 'Rechrd', m9Tag: '',
+          m10Name: '天街下小雨', m10Tag: '',
+          m11Name: 'Xydia', m11Tag: '',
+          m12Name: 'Ariakage', m12Tag: '',
+          backHome: '← 返回首页',
+          disclaimer: '免责声明：本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。'
+        },
+        en: {
+          home: 'Home', about: 'About',
+          teamLabel: 'Team',
+          teamTitle: 'In Resonance',
+          teamBody: 'No great endeavor is ever completed alone. Here is a group of young people willing to devote over a dozen hours every week, holding fast to a shared vision.',
+          group1Title: 'Core Team', group1Desc: 'The core members carrying the _entropy vision — setting direction, orchestrating the big picture, and keeping the organization moving forward.',
+          group2Title: 'Tech & Design', group2Desc: 'Building the infrastructure of the digital world and guarding the visual language — websites, features, interfaces, and a smooth, reliable experience for every participant.',
+          group3Title: 'Biz & Legal', group3Desc: 'Guarding compliance and commercial boundaries, handling contracts, partnerships, and legal affairs so everything runs in order.',
+          group5Title: 'Consultants', group5Desc: 'Providing external support and advisory in specialized fields, supplementing the team with key capabilities in a flexible way.',
+          m1Name: 'Canister Xu', m1Tag: 'Buy me a white Monster Energy and I\'ll solve your problem.',
+          m2Name: 'Lonely', m2Tag: 'I\'m Qin Shi Huang, vivo50 and let\'s see what you\'ve got.',
+          m3Name: 'Cherry Zhu', m3Tag: 'May we meet again someday in the future.',
+          m4Name: 'KevinYang', m4Tag: 'Glad you came.',
+          m5Name: 'Evan Tee', m5Tag: 'Light the fire.',
+          m6Name: 'zongtianshuo', m6Tag: '',
+          m7Name: 'BillW Gong', m7Tag: '',
+          m8Name: 'ZengChao', m8Tag: '',
+          m9Name: 'Rechrd', m9Tag: '',
+          m10Name: 'PrismScopes', m10Tag: '',
+          m11Name: 'Xydia', m11Tag: '',
+          m12Name: 'Ariakage', m12Tag: '',
+          backHome: '← Back to Home',
+          disclaimer: 'Disclaimer: The AdventureX trademark referenced on this website is owned by Hangzhou Yuxu Technology Co., Ltd.; the TechCrunch trademark is held by Tech Media Holdings International LLC; the SegmentFault trademark is owned by Wuhan Fulin Technology Co., Ltd. This website references the above trademarks solely for narrative and illustrative purposes, not for commercial use, and does not imply any affiliation or partnership with the rights holders. All trademark rights belong to their respective owners.'
+        }
+      };
+
+      function applyLang(lang) {
+        var t = i18n[lang];
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) {
+            el.textContent = t[key];
+            el.style.display = t[key] === '' ? 'none' : '';
+          }
+        });
+        currentLang = lang;
+      }
+
+      langToggle.addEventListener('click', function() {
+        applyLang(currentLang === 'zh' ? 'en' : 'zh');
+      });
+      langToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); langToggle.click(); }
+      });
+
+      themeToggle.addEventListener('click', function() {
+        var html = document.documentElement;
+        var current = html.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('themePref', next);
+      });
+
+      var mobileMedia = window.matchMedia('(max-width: 900px)');
+      function handleMobileTheme(e) {
+        if (e.matches && !localStorage.getItem('themePref')) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      }
+      handleMobileTheme(mobileMedia);
+
+      scrollTopBtn.addEventListener('click', function() {
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollToPlugin);
+
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) {
+        gsap.globalTimeline.timeScale(0);
+        gsap.set('.reveal', { opacity: 1, y: 0 });
+      } else {
+        var heroEls = document.querySelectorAll('.team-hero .reveal');
+        gsap.timeline({ delay: 0.2 })
+          .fromTo(heroEls, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12 });
+
+        gsap.utils.toArray('.reveal').forEach(function(el) {
+          if (el.closest('.team-hero')) return;
+          gsap.fromTo(el,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+            }
+          );
+        });
+
+        gsap.utils.toArray('.team-grid').forEach(function(grid) {
+          var cards = grid.children;
+          gsap.fromTo(cards,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1,
+              scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
+            }
+          );
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
