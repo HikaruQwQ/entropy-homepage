@@ -72,12 +72,39 @@ const groups: TeamGroup[] = [
   },
 ];
 
-function TeamCard({ member, t }: { member: TeamMember; t: (key: TeamI18nKey) => string }) {
+function TeamCard({
+  member,
+  t,
+  active,
+  onToggle,
+}: {
+  member: TeamMember;
+  t: (key: TeamI18nKey) => string;
+  active: boolean;
+  onToggle: (src: string | null) => void;
+}) {
   const [imgFailed, setImgFailed] = useState(false);
   const tagline = t(member.tagKey);
+  const interactive = tagline !== '';
 
   return (
-    <div className="team-card reveal">
+    <div
+      className={`team-card reveal${active ? ' is-active' : ''}${interactive ? ' has-sign' : ''}`}
+      onClick={interactive ? () => onToggle(active ? null : member.src) : undefined}
+      onKeyDown={
+        interactive
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onToggle(active ? null : member.src);
+              }
+            }
+          : undefined
+      }
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-expanded={interactive ? active : undefined}
+    >
       <div className={`team-card-avatar${imgFailed ? ' avatar-empty' : ''}`}>
         {!imgFailed && (
           <img
@@ -91,10 +118,12 @@ function TeamCard({ member, t }: { member: TeamMember; t: (key: TeamI18nKey) => 
       </div>
       <div className="team-card-info">
         <h3 className="team-card-name">{t(member.nameKey)}</h3>
-        <p className="team-card-tagline" style={tagline === '' ? { display: 'none' } : undefined}>
-          {tagline}
-        </p>
       </div>
+      {interactive && (
+        <div className="team-card-sign" aria-hidden={!active}>
+          <p className="team-card-sign-text">{tagline}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -105,6 +134,7 @@ export function Team() {
   useLenis();
   const { scrolled, showScrollTop } = useScrollState(false);
   useTeamAnimations();
+  const [activeMember, setActiveMember] = useState<string | null>(null);
 
   return (
     <>
@@ -141,7 +171,13 @@ export function Team() {
               </div>
               <div className="team-grid">
                 {group.members.map((member) => (
-                  <TeamCard key={member.src} member={member} t={t} />
+                  <TeamCard
+                    key={member.src}
+                    member={member}
+                    t={t}
+                    active={activeMember === member.src}
+                    onToggle={setActiveMember}
+                  />
                 ))}
               </div>
             </div>
