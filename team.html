@@ -40,7 +40,11 @@
       --container-max: 1920px;
       --container-pad: 40px;
       --radius: 10px;
-      --transition: 0.3s ease;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+      --transition: 180ms ease;
+      --press-transition: 140ms var(--ease-out);
       --logo-filter: none;
     }
     [data-theme="light"] {
@@ -137,9 +141,8 @@
       position: relative;
       padding: 4px 0;
       opacity: 0.5;
-      transition: opacity 0.4s ease;
+      transition: opacity 160ms ease, transform 160ms var(--ease-out);
     }
-    .nav-link:hover { opacity: 0.8; transform: translateY(-1px); }
     .nav-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
     .lang-toggle {
       appearance: none;
@@ -153,9 +156,8 @@
       opacity: 0.4;
       cursor: pointer;
       user-select: none;
-      transition: opacity var(--transition);
+      transition: opacity 160ms ease, transform var(--press-transition);
     }
-    .lang-toggle:hover { opacity: 0.8; }
     .theme-toggle {
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -163,7 +165,7 @@
       background: transparent;
       cursor: pointer;
       position: relative;
-      transition: border-color var(--transition);
+      transition: border-color var(--transition), transform var(--press-transition);
       flex-shrink: 0;
     }
     .theme-toggle::before {
@@ -173,14 +175,13 @@
       width: 16px; height: 16px;
       border-radius: 50%;
       background: var(--color-bg);
-      transition: transform var(--transition);
+      transition: transform 200ms var(--ease-in-out);
     }
     [data-theme="light"] .theme-toggle::before {
-      transform: translateX(-4px);
-      width: 12px; height: 12px;
+      transform: translate(-4px, -2px) scale(0.75);
     }
     .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: 0; background: transparent; color: inherit; }
-    .nav-burger span { width: 24px; height: 2px; background: var(--color-text); transition: var(--transition); }
+    .nav-burger span { width: 24px; height: 2px; background: var(--color-text); transition: background-color var(--transition), opacity 160ms ease, transform 180ms var(--ease-out); }
     .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-burger.open span:nth-child(2) { opacity: 0; }
     .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -247,17 +248,13 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 200ms var(--ease-out), border-color 180ms ease;
     }
     .team-card-avatar {
       flex-shrink: 0;
     }
     .team-card-info {
       flex: 1;
-    }
-    .team-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--color-accent);
     }
     .team-card-avatar {
       width: 100%;
@@ -281,9 +278,8 @@
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center top;
-      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 250ms var(--ease-out);
     }
-    .team-card:hover .team-card-avatar img { transform: scale(1.08); }
     .team-card-info {
       display: flex;
       flex-direction: column;
@@ -329,12 +325,7 @@
       padding: 14px 28px;
       border: 1px solid var(--color-border);
       border-radius: 100px;
-      transition: opacity var(--transition), transform 0.3s ease, border-color var(--transition);
-    }
-    .team-back-link:hover {
-      opacity: 1;
-      transform: translateY(-2px);
-      border-color: var(--color-accent);
+      transition: opacity 180ms ease, transform var(--press-transition), border-color 180ms ease;
     }
 
     /* 页脚 */
@@ -363,7 +354,6 @@
       color: var(--color-text-muted);
       transition: color var(--transition);
     }
-    .footer-link:hover { color: var(--color-text); transform: translateY(-1px); }
     .footer-disclaimer {
       font-size: clamp(10px, 0.8vw, 12px);
       font-weight: 400;
@@ -391,26 +381,42 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity var(--transition), transform 0.3s ease;
+      transition: opacity 180ms ease, transform var(--press-transition);
       z-index: 99;
     }
-    .scroll-top:hover { transform: translateY(-3px); }
     .scroll-top.visible { opacity: 1; pointer-events: auto; }
 
+    :where(.team-back-link, .lang-toggle, .theme-toggle, .nav-burger, .scroll-top):active:not(:focus-visible) {
+      transform: scale(0.97);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .nav-link:hover { opacity: 0.8; transform: translateY(-1px); }
+      .lang-toggle:hover { opacity: 0.8; }
+      .team-card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+      .team-card:hover .team-card-avatar img { transform: scale(1.04); }
+      .team-back-link:hover { opacity: 1; transform: translateY(-2px); border-color: var(--color-accent); }
+      .footer-link:hover { color: var(--color-text); transform: translateY(-1px); }
+      .scroll-top:hover { transform: translateY(-3px); }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      * { transition: none !important; animation: none !important; }
+      * { animation: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; will-change: auto; }
+      :where(.team-card, .team-card-avatar img, .team-back-link, .lang-toggle, .theme-toggle, .nav-burger, .scroll-top) {
+        transform: none !important;
+      }
     }
     @media (max-width: 900px) {
-      .nav-links { display: none; }
+      .nav-links { position: fixed; top: 58px; left: 16px; right: 16px; display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg-card); box-shadow: 0 12px 32px rgba(0,0,0,0.22); visibility: hidden; pointer-events: none; opacity: 0; transform: translateY(-4px) scale(0.96); transform-origin: top right; transition: visibility 0s linear 180ms, opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
       .nav-burger { display: flex; }
-      .nav-links.open { position: fixed; top: 58px; left: 16px; right: 16px; display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg-card); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+      .nav-links.open { visibility: visible; pointer-events: auto; opacity: 1; transform: translateY(0) scale(1); transition-delay: 0s; }
+      .nav-links.no-motion { transition: none !important; }
       .nav-links.open .nav-link { padding: 12px; }
       .nav-actions { display: flex; gap: 12px; margin-left: auto; }
       .lang-toggle { font-size: 13px; }
       .theme-toggle { width: 22px; height: 22px; }
       .theme-toggle::before { top: 1px; left: 4px; width: 14px; height: 14px; }
-      [data-theme="light"] .theme-toggle::before { transform: translateX(-3px); width: 10px; height: 10px; }
+      [data-theme="light"] .theme-toggle::before { transform: translate(-3px, -2px) scale(0.72); }
       .nav-inner { padding: 10px 16px; gap: 12px; }
       .nav-logo img { height: 26px; }
     }
@@ -618,7 +624,8 @@
   <script src="assets/lenis.min.js"></script>
 
   <script>
-    if (window.Lenis && window.gsap) {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (window.Lenis && window.gsap && !prefersReducedMotion) {
       var lenis = new Lenis({
         duration: 1.1,
         easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
@@ -647,35 +654,50 @@
       themeToggle.setAttribute('aria-pressed', String(initialTheme === 'light'));
       themeToggle.setAttribute('aria-label', initialTheme === 'dark' ? '切换为浅色主题' : '切换为深色主题');
 
-      window.addEventListener('scroll', function() {
+      var scrollFrame = 0;
+      function updateScrollState() {
+        scrollFrame = 0;
         var y = window.scrollY;
         if (y > 60) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
         if (y > 400) { scrollTopBtn.classList.add('visible'); } else { scrollTopBtn.classList.remove('visible'); }
-      });
+      }
+      updateScrollState();
+      window.addEventListener('scroll', function() {
+        if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollState);
+      }, { passive: true });
 
-      navBurger.addEventListener('click', function() {
-        var isOpen = navLinks.classList.toggle('open');
+      function setMenuOpen(isOpen, instant) {
+        if (instant) navLinks.classList.add('no-motion');
+        navLinks.classList.toggle('open', isOpen);
         navBurger.classList.toggle('open', isOpen);
         navBurger.setAttribute('aria-expanded', String(isOpen));
         navBurger.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
+        if (instant) {
+          window.requestAnimationFrame(function() {
+            window.requestAnimationFrame(function() { navLinks.classList.remove('no-motion'); });
+          });
+        }
+      }
+
+      navBurger.addEventListener('click', function(e) {
+        setMenuOpen(!navLinks.classList.contains('open'), e.detail === 0);
       });
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-          navLinks.classList.remove('open');
-          navBurger.classList.remove('open');
-          navBurger.setAttribute('aria-expanded', 'false');
-          navBurger.setAttribute('aria-label', '打开菜单');
+          setMenuOpen(false, true);
           navBurger.focus();
+        }
+      });
+      document.addEventListener('pointerdown', function(e) {
+        if (navLinks.classList.contains('open') && !nav.contains(e.target)) {
+          setMenuOpen(false, false);
         }
       });
 
       navLinks.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          navLinks.classList.remove('open');
-          navBurger.classList.remove('open');
-          navBurger.setAttribute('aria-expanded', 'false');
-          navBurger.setAttribute('aria-label', '打开菜单');
+        link.addEventListener('click', function(e) {
+          setMenuOpen(false, e.detail === 0);
         });
       });
 
@@ -771,12 +793,15 @@
         }
       }
       handleMobileTheme(mobileMedia);
+      mobileMedia.addEventListener('change', function(e) {
+        if (!e.matches) setMenuOpen(false, true);
+      });
 
       scrollTopBtn.addEventListener('click', function() {
         if (window.__lenis) {
-          window.__lenis.scrollTo(0, { duration: 1.2 });
+          window.__lenis.scrollTo(0, { duration: 0.8 });
         } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         }
       });
 
@@ -793,21 +818,21 @@
       }
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reducedMotion = prefersReducedMotion;
       if (reducedMotion) {
         gsap.globalTimeline.timeScale(0);
         gsap.set('.reveal', { opacity: 1, y: 0 });
       } else {
         var heroEls = document.querySelectorAll('.team-hero .reveal');
         gsap.timeline({ delay: 0.2 })
-          .fromTo(heroEls, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12 });
+          .fromTo(heroEls, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.06 });
 
         gsap.utils.toArray('.reveal').forEach(function(el) {
-          if (el.closest('.team-hero')) return;
+          if (el.closest('.team-hero') || el.classList.contains('team-card')) return;
           gsap.fromTo(el,
-            { opacity: 0, y: 40 },
+            { opacity: 0, y: 20 },
             {
-              opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+              opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
               scrollTrigger: { trigger: el, start: 'top 88%', once: true }
             }
           );
@@ -816,9 +841,9 @@
         gsap.utils.toArray('.team-grid').forEach(function(grid) {
           var cards = grid.children;
           gsap.fromTo(cards,
-            { opacity: 0, y: 30 },
+            { opacity: 0, y: 16 },
             {
-              opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1,
+              opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', stagger: 0.055,
               scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
             }
           );
