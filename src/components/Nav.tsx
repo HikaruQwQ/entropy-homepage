@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { DropdownMenu, Toggle } from 'radix-ui';
 import { Button } from './Button';
+import { MoonIcon, SunIcon } from './icons';
 
 export interface NavLinkItem {
   href: string;
@@ -81,7 +82,9 @@ export function Nav({
             pressed={themePressed}
             onPressedChange={onToggleTheme}
             aria-label={themeLabel}
-          />
+          >
+            {themePressed ? <SunIcon /> : <MoonIcon />}
+          </Toggle.Root>
           <DropdownMenu.Root open={menuOpen} onOpenChange={setMenuOpen} modal={false}>
             <DropdownMenu.Trigger asChild>
               <button
