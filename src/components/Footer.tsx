@@ -1,9 +1,9 @@
 import { XIcon } from './icons';
 
 export function Footer({ disclaimer }: { disclaimer: string }) {
-  const colonIndex = disclaimer.search(/[:：]/);
-  const disclaimerLabel = colonIndex >= 0 ? disclaimer.slice(0, colonIndex + 1) : '';
-  const disclaimerContent = colonIndex >= 0 ? disclaimer.slice(colonIndex + 1).trim() : disclaimer;
+  const labelMatch = disclaimer.match(/^(免责声明|Disclaimer)[:：]?\s*/);
+  const disclaimerLabel = labelMatch ? labelMatch[1] : '';
+  const disclaimerContent = labelMatch ? disclaimer.slice(labelMatch[0].length) : disclaimer;
 
   return (
     <footer className="footer">
