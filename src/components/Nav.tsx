@@ -50,13 +50,36 @@ export function Nav({
     return () => mq.removeEventListener('change', onChange);
   }, []);
 
-  // 菜单打开时锁定页面滚动（含 Lenis），并支持 Esc 关闭
   useEffect(() => {
     if (!menuOpen) return;
     document.body.style.overflow = 'hidden';
     getLenis()?.stop();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const overlay = overlayRef.current;
+      if (!overlay) return;
+      const focusables = Array.from(
+        overlay.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.tabIndex >= 0 && !el.hasAttribute('disabled'));
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey) {
+        if (!(active instanceof HTMLElement) || active === first || !overlay.contains(active)) {
+          e.preventDefault();
+          last.focus({ preventScroll: true });
+        }
+      } else if (!(active instanceof HTMLElement) || active === last || !overlay.contains(active)) {
+        e.preventDefault();
+        first.focus({ preventScroll: true });
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => {
@@ -66,7 +89,6 @@ export function Nav({
     };
   }, [menuOpen]);
 
-  // 焦点管理：打开时聚焦首个链接，关闭时归还给汉堡按钮
   useEffect(() => {
     if (menuOpen) {
       wasOpenRef.current = true;
@@ -83,7 +105,6 @@ export function Nav({
     }
   }, [menuOpen]);
 
-  // 点击链接前先解锁滚动，保证后续锚点滚动（Lenis）能立即生效
   const unlockScroll = () => {
     document.body.style.overflow = '';
     getLenis()?.start();
@@ -159,6 +180,9 @@ export function Nav({
         ref={overlayRef}
         id="nav-overlay"
         className={`nav-overlay${menuOpen ? ' open' : ''}`}
+        role="dialog"
+        aria-modal={menuOpen || undefined}
+        aria-label="移动端导航"
       >
         <nav className="nav-overlay-links" aria-label="移动端导航">
           {links.map((link) => {
