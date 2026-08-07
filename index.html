@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>_entropy 熵序</title>
-  <meta name="description" content="一个由中学生创办的黑客松组织，致力于推动科技创新，促进创新生态发展。">
+  <title>_entropy 熵序｜青年科技与艺术团队</title>
+  <meta name="description" content="_entropy 熵序是由青年创作者组成的科技与艺术团队，探索软件开发、视觉设计与创新实践的更多可能。">
   <meta name="theme-color" content="#0B0B0B">
-  <meta property="og:title" content="极星黑客松 Polaris Hackathon 2027">
-  <meta property="og:description" content="一个由中学生创办的黑客松组织">
+  <meta property="og:title" content="_entropy 熵序｜青年科技与艺术团队">
+  <meta property="og:description" content="一群青年创作者，在科技与艺术之间探索、协作与创造。">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="_entropy 熵序">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="assets/join_bg.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="918">
+  <meta property="og:image:height" content="308">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="_entropy 熵序｜青年科技与艺术团队">
+  <meta name="twitter:description" content="一群青年创作者，在科技与艺术之间探索、协作与创造。">
+  <meta name="twitter:image" content="assets/join_bg.png">
+  <meta itemprop="name" content="_entropy 熵序｜青年科技与艺术团队">
+  <meta itemprop="description" content="一群青年创作者，在科技与艺术之间探索、协作与创造。">
+  <meta itemprop="image" content="assets/join_bg.png">
+  <link rel="icon" href="assets/entropy_logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
   <link href="https://fonts.googleapis.cn/css2?family=Barlow:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
@@ -69,12 +83,12 @@
     img { display: block; max-width: 100%; height: auto; -webkit-user-drag: none; user-drag: none; }
     .j8k1l6 { font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
     a { color: inherit; text-decoration: none; }
+    :where(a, button):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
     .container {
       max-width: var(--container-max);
       margin: 0 auto;
       padding: 0 var(--container-pad);
     }
-    body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
     .m2n5p9 { background: linear-gradient(135deg, #2c3e50, #4a6741); padding: 24px; }
     .eyebrow {
       font-size: clamp(14px, 1.3vw, 24px);
@@ -272,6 +286,10 @@
     }
     .p1q4r7 { vertical-align: top; padding: 8px; }
     .lang-toggle {
+      appearance: none;
+      padding: 0;
+      border: 0;
+      background: transparent;
       font-family: var(--font-en);
       font-size: clamp(12px, 0.9vw, 16px);
       font-weight: 500;
@@ -316,6 +334,9 @@
       gap: 5px;
       cursor: pointer;
       padding: 8px;
+      border: 0;
+      background: transparent;
+      color: inherit;
     }
     .v3w6x1 { object-fit: contain; max-height: 100%; }
     .nav-burger span {
@@ -702,10 +723,10 @@
       .a1b4c7 { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 900px) {
-      .nav-links,
-      .nav-burger {
-        display: none;
-      }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-links.open { position: fixed; top: 58px; left: 16px; right: 16px; display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg-card); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+      .nav-links.open .nav-link { padding: 12px; }
       .nav-actions {
         display: flex;
         gap: 12px;
@@ -823,11 +844,11 @@
         <a href="#about" class="nav-link">About</a>
       </nav>
       <div class="nav-actions">
-        <span class="lang-toggle" id="langToggle" role="button" tabindex="0" aria-label="切换语言">中/EN</span>
-        <button class="theme-toggle" id="themeToggle" aria-label="切换主题"></button>
-        <div class="nav-burger" id="navBurger" role="button" tabindex="0" aria-label="菜单">
+        <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch to English">中/EN</button>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="切换为浅色主题" aria-pressed="false"></button>
+        <button type="button" class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span><span></span>
-        </div>
+        </button>
       </div>
     </div>
   </header>
@@ -835,7 +856,7 @@
   <main>
     <section id="home" class="hero">
       <div class="hero-image-wrap">
-        <img src="assets/hero_bg.png" alt="Polaris Hackathon 2027" loading="eager">
+        <img src="assets/hero_bg.png" alt="极星黑客松主视觉" width="916" height="307" loading="eager" fetchpriority="high" decoding="async">
         <span class="hero-doing" data-i18n="heroDoing">我们正在做</span>
         <div class="hero-logo">
           <img src="assets/polaris_logo.svg" alt="POLARIS">
@@ -903,11 +924,11 @@
       <div class="container">
         <a href="team.html" class="team-entry reveal" aria-label="团队成员">
           <div class="avatar-group">
-            <img src="assets/team/mmexport1717774465091.jpg" alt="杨景铄" class="avatar-group-item">
-            <img src="assets/team/IMG_0026.JPEG" alt="许白" class="avatar-group-item">
-            <img src="assets/team/1786002194999.jpeg" alt="Lonely" class="avatar-group-item">
-            <img src="assets/team/1755440975063.jpeg" alt="Cherry Zhu" class="avatar-group-item">
-            <img src="assets/team/mmexport1786004098313.jpg" alt="Evan Tee" class="avatar-group-item">
+            <img src="assets/team/mmexport1717774465091.jpg" alt="杨景铄" class="avatar-group-item" loading="lazy" decoding="async">
+            <img src="assets/team/IMG_0026.JPEG" alt="许白" class="avatar-group-item" loading="lazy" decoding="async">
+            <img src="assets/team/1786002194999.jpeg" alt="Lonely" class="avatar-group-item" loading="lazy" decoding="async">
+            <img src="assets/team/1755440975063.jpeg" alt="Cherry Zhu" class="avatar-group-item" loading="lazy" decoding="async">
+            <img src="assets/team/mmexport1786004098313.jpg" alt="Evan Tee" class="avatar-group-item" loading="lazy" decoding="async">
             <span class="avatar-group-more" aria-hidden="true">_</span>
           </div>
           <span class="team-entry-text" data-i18n="teamEntryText">团队成员 →</span>
@@ -917,8 +938,8 @@
 
     <section id="join" class="join-section section-alt">
       <div class="container">
-        <a href="mailto:hr@entropy.asia" class="join-card reveal" id="joinCard" role="button" aria-label="加入我们">
-          <img src="assets/join_bg.png" alt="JOIN US" loading="lazy">
+        <a href="mailto:hr@entropy.asia" class="join-card reveal" id="joinCard" aria-label="加入我们">
+          <img src="assets/join_bg.png" alt="JOIN US" width="918" height="308" loading="lazy" decoding="async">
           <div class="join-overlay">
             <div>
               <p class="join-title">JOIN</p>
@@ -969,9 +990,7 @@
   </div>
 
   <script>
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-    if (window.Lenis) {
+    if (window.Lenis && window.gsap) {
       var lenis = new Lenis({
         duration: 1.1,
         easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
@@ -1073,6 +1092,9 @@
       if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
       }
+      var initialTheme = document.documentElement.getAttribute('data-theme');
+      themeToggle.setAttribute('aria-pressed', String(initialTheme === 'light'));
+      themeToggle.setAttribute('aria-label', initialTheme === 'dark' ? '切换为浅色主题' : '切换为深色主题');
 
       window.addEventListener('scroll', function() {
         var y = window.scrollY;
@@ -1093,7 +1115,17 @@
             current = sec.id;
           }
         });
-        links.forEach(function(link) {
+        document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
+          navBurger.focus();
+        }
+      });
+
+      links.forEach(function(link) {
           link.classList.remove('active');
           var href = link.getAttribute('href');
           if (href === '#' + current) {
@@ -1103,13 +1135,18 @@
       });
 
       navBurger.addEventListener('click', function() {
-        navLinks.classList.toggle('open');
-        navBurger.classList.toggle('open');
+        var isOpen = navLinks.classList.toggle('open');
+        navBurger.classList.toggle('open', isOpen);
+        navBurger.setAttribute('aria-expanded', String(isOpen));
+        navBurger.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
       });
-      navBurger.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          navBurger.click();
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
+          navBurger.focus();
         }
       });
 
@@ -1117,6 +1154,8 @@
         link.addEventListener('click', function(e) {
           navLinks.classList.remove('open');
           navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
           var href = link.getAttribute('href');
           if (href && href.charAt(0) === '#' && href.length > 1) {
             var target = document.querySelector(href);
@@ -1202,12 +1241,23 @@
             el.textContent = t[key];
           }
         });
-        links.forEach(function(link) {
+        document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
+          navBurger.focus();
+        }
+      });
+
+      links.forEach(function(link) {
           var href = link.getAttribute('href');
           if (href === '#home') link.textContent = t.home;
           if (href === '#about') link.textContent = t.about;
         });
         currentLang = lang;
+        langToggle.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换为中文');
         localStorage.setItem('langPref', lang);
       }
 
@@ -1219,18 +1269,14 @@
       langToggle.addEventListener('click', function() {
         applyLang(currentLang === 'zh' ? 'en' : 'zh');
       });
-      langToggle.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          langToggle.click();
-        }
-      });
 
       themeToggle.addEventListener('click', function() {
         var html = document.documentElement;
         var current = html.getAttribute('data-theme');
         var next = current === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
+        themeToggle.setAttribute('aria-pressed', String(next === 'light'));
+        themeToggle.setAttribute('aria-label', next === 'dark' ? '切换为浅色主题' : '切换为深色主题');
         localStorage.setItem('themePref', next);
       });
 
@@ -1250,8 +1296,11 @@
         }
       });
 
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.registerPlugin(ScrollToPlugin);
+      if (!window.gsap || !window.ScrollTrigger || !window.ScrollToPlugin) {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reducedMotion) {

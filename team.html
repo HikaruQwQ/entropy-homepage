@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>团队 · _entropy 熵序</title>
-  <meta name="description" content="_entropy 熵序团队成员介绍。">
+  <title>团队成员｜_entropy 熵序</title>
+  <meta name="description" content="认识 _entropy 熵序团队：一群在技术、设计、商务与创意领域同频协作的青年创作者。">
   <meta name="theme-color" content="#0B0B0B">
-  <meta property="og:title" content="团队 · _entropy 熵序">
-  <meta property="og:description" content="_entropy 熵序团队成员介绍">
+  <meta property="og:title" content="团队成员｜_entropy 熵序">
+  <meta property="og:description" content="认识这群在技术、设计、商务与创意领域同频协作的青年创作者。">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="_entropy 熵序">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="assets/join_bg.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="918">
+  <meta property="og:image:height" content="308">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="团队成员｜_entropy 熵序">
+  <meta name="twitter:description" content="认识这群在技术、设计、商务与创意领域同频协作的青年创作者。">
+  <meta name="twitter:image" content="assets/join_bg.png">
+  <meta itemprop="name" content="团队成员｜_entropy 熵序">
+  <meta itemprop="description" content="认识这群在技术、设计、商务与创意领域同频协作的青年创作者。">
+  <meta itemprop="image" content="assets/join_bg.png">
+  <link rel="icon" href="assets/entropy_logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
   <link href="https://fonts.googleapis.cn/css2?family=Barlow:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,11 +65,11 @@
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
       transition: background var(--transition), color var(--transition);
-      -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
     }
     h1, h2, h3, h4, p { margin: 0; }
     img { display: block; max-width: 100%; height: auto; -webkit-user-drag: none; user-drag: none; }
     a { color: inherit; text-decoration: none; }
+    :where(a, button):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
     .container {
       max-width: var(--container-max);
       margin: 0 auto;
@@ -127,6 +141,10 @@
     .nav-link:hover { opacity: 0.8; transform: translateY(-1px); }
     .nav-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
     .lang-toggle {
+      appearance: none;
+      padding: 0;
+      border: 0;
+      background: transparent;
       font-family: var(--font-en);
       font-size: clamp(12px, 0.9vw, 16px);
       font-weight: 500;
@@ -160,7 +178,7 @@
       transform: translateX(-4px);
       width: 12px; height: 12px;
     }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: 0; background: transparent; color: inherit; }
     .nav-burger span { width: 24px; height: 2px; background: var(--color-text); transition: var(--transition); }
     .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-burger.open span:nth-child(2) { opacity: 0; }
@@ -383,7 +401,10 @@
       * { transition: none !important; animation: none !important; }
     }
     @media (max-width: 900px) {
-      .nav-links, .nav-burger { display: none; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-links.open { position: fixed; top: 58px; left: 16px; right: 16px; display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg-card); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+      .nav-links.open .nav-link { padding: 12px; }
       .nav-actions { display: flex; gap: 12px; margin-left: auto; }
       .lang-toggle { font-size: 13px; }
       .theme-toggle { width: 22px; height: 22px; }
@@ -417,11 +438,11 @@
         <a href="index.html#about" class="nav-link" data-i18n="about">About</a>
       </nav>
       <div class="nav-actions">
-        <span class="lang-toggle" id="langToggle" role="button" tabindex="0" aria-label="切换语言">中/EN</span>
-        <button class="theme-toggle" id="themeToggle" aria-label="切换主题"></button>
-        <div class="nav-burger" id="navBurger" role="button" tabindex="0" aria-label="菜单">
+        <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch to English">中/EN</button>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="切换为浅色主题" aria-pressed="false"></button>
+        <button type="button" class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span><span></span>
-        </div>
+        </button>
       </div>
     </div>
   </header>
@@ -444,21 +465,21 @@
         </div>
         <div class="team-grid">
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/IMG_0026.JPEG" alt="许白" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/IMG_0026.JPEG" alt="许白" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m1Name">许白</h3>
               <p class="team-card-tagline" data-i18n="m1Tag">请我解决问题只需要给我买瓶白色魔爪。</p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/F6UvP_Lk.jpg" alt="踪天朔" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/F6UvP_Lk.jpg" alt="踪天朔" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m6Name">踪天朔</h3>
               <p class="team-card-tagline" data-i18n="m6Tag" style="display:none"></p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/mmexport1783774558948.jpg" alt="比尔" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/mmexport1783774558948.jpg" alt="比尔" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m7Name">比尔</h3>
               <p class="team-card-tagline" data-i18n="m7Tag" style="display:none"></p>
@@ -477,35 +498,35 @@
         </div>
         <div class="team-grid">
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/1786002194999.jpeg" alt="Lonely" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/1786002194999.jpeg" alt="Lonely" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m2Name">Lonely</h3>
               <p class="team-card-tagline" data-i18n="m2Tag">我是秦始皇，vivo50看看实力</p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/1755440975063.jpeg" alt="Cherry Zhu" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/1755440975063.jpeg" alt="Cherry Zhu" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m3Name">Cherry Zhu</h3>
               <p class="team-card-tagline" data-i18n="m3Tag">愿未来的某一天能够与你再次相遇。</p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/mmexport1786004098313.jpg" alt="Evan Tee" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/mmexport1786004098313.jpg" alt="Evan Tee" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m5Name">Evan Tee</h3>
               <p class="team-card-tagline" data-i18n="m5Tag">点燃篝火</p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/ar.jpg" alt="Ariakage" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/ar.jpg" alt="Ariakage" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m12Name">Ariakage</h3>
               <p class="team-card-tagline" data-i18n="m12Tag" style="display:none"></p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/1786007031670.jpg" alt="Rechrd" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/1786007031670.jpg" alt="Rechrd" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m9Name">Rechrd</h3>
               <p class="team-card-tagline" data-i18n="m9Tag" style="display:none"></p>
@@ -524,14 +545,14 @@
         </div>
         <div class="team-grid">
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/mmexport1717774465091.jpg" alt="杨景铄" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/mmexport1717774465091.jpg" alt="杨景铄" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m4Name">杨景铄</h3>
               <p class="team-card-tagline" data-i18n="m4Tag">喜欢您来</p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/1786006726932.jpg" alt="流萤" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/1786006726932.jpg" alt="流萤" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m8Name">流萤</h3>
               <p class="team-card-tagline" data-i18n="m8Tag" style="display:none"></p>
@@ -550,14 +571,14 @@
         </div>
         <div class="team-grid">
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/mmexport1786006880805.jpg" alt="天街下小雨" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/mmexport1786006880805.jpg" alt="天街下小雨" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m10Name">天街下小雨</h3>
               <p class="team-card-tagline" data-i18n="m10Tag" style="display:none"></p>
             </div>
           </div>
           <div class="team-card reveal">
-            <div class="team-card-avatar"><img src="assets/team/OIP.gr3vp5KBMf9wj6DhLdCupQAAAA.jpg" alt="Xydia" onerror="this.style.display='none';this.parentElement.classList.add('avatar-empty');"></div>
+            <div class="team-card-avatar"><img src="assets/team/OIP.gr3vp5KBMf9wj6DhLdCupQAAAA.jpg" alt="Xydia" loading="lazy" decoding="async"></div>
             <div class="team-card-info">
               <h3 class="team-card-name" data-i18n="m11Name">Xydia</h3>
               <p class="team-card-tagline" data-i18n="m11Tag" style="display:none"></p>
@@ -596,9 +617,7 @@
   <script src="assets/lenis.min.js"></script>
 
   <script>
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-    if (window.Lenis) {
+    if (window.Lenis && window.gsap) {
       var lenis = new Lenis({
         duration: 1.1,
         easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
@@ -615,17 +634,48 @@
       var langToggle = document.getElementById('langToggle');
       var nav = document.getElementById('nav');
       var scrollTopBtn = document.getElementById('scrollTop');
+      var navLinks = document.getElementById('navLinks');
+      var navBurger = document.getElementById('navBurger');
       var currentLang = 'zh';
 
       var savedTheme = localStorage.getItem('themePref');
       if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
       }
+      var initialTheme = document.documentElement.getAttribute('data-theme');
+      themeToggle.setAttribute('aria-pressed', String(initialTheme === 'light'));
+      themeToggle.setAttribute('aria-label', initialTheme === 'dark' ? '切换为浅色主题' : '切换为深色主题');
 
       window.addEventListener('scroll', function() {
         var y = window.scrollY;
         if (y > 60) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
         if (y > 400) { scrollTopBtn.classList.add('visible'); } else { scrollTopBtn.classList.remove('visible'); }
+      });
+
+      navBurger.addEventListener('click', function() {
+        var isOpen = navLinks.classList.toggle('open');
+        navBurger.classList.toggle('open', isOpen);
+        navBurger.setAttribute('aria-expanded', String(isOpen));
+        navBurger.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
+          navBurger.focus();
+        }
+      });
+
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('open');
+          navBurger.classList.remove('open');
+          navBurger.setAttribute('aria-expanded', 'false');
+          navBurger.setAttribute('aria-label', '打开菜单');
+        });
       });
 
       var i18n = {
@@ -690,6 +740,7 @@
           }
         });
         currentLang = lang;
+        langToggle.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换为中文');
         localStorage.setItem('langPref', lang);
       }
 
@@ -701,15 +752,14 @@
       langToggle.addEventListener('click', function() {
         applyLang(currentLang === 'zh' ? 'en' : 'zh');
       });
-      langToggle.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); langToggle.click(); }
-      });
 
       themeToggle.addEventListener('click', function() {
         var html = document.documentElement;
         var current = html.getAttribute('data-theme');
         var next = current === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
+        themeToggle.setAttribute('aria-pressed', String(next === 'light'));
+        themeToggle.setAttribute('aria-label', next === 'dark' ? '切换为浅色主题' : '切换为深色主题');
         localStorage.setItem('themePref', next);
       });
 
@@ -729,8 +779,18 @@
         }
       });
 
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.registerPlugin(ScrollToPlugin);
+      document.querySelectorAll('.team-card-avatar img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          img.hidden = true;
+          img.parentElement.classList.add('avatar-empty');
+        });
+      });
+
+      if (!window.gsap || !window.ScrollTrigger || !window.ScrollToPlugin) {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reducedMotion) {
