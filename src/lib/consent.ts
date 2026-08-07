@@ -49,14 +49,24 @@ export function initConsentMode(): void {
   gtag('config', GA_ID);
 }
 
+export const COOKIE_SETTINGS_EVENT = 'entropy:open-cookie-settings';
+
+export function requestOpenCookieSettings(): void {
+  window.dispatchEvent(new Event(COOKIE_SETTINGS_EVENT));
+}
+
+function updateConsent(state: 'granted' | 'denied'): void {
+  window.gtag?.('consent', 'update', {
+    ad_user_data: state,
+    ad_personalization: state,
+    ad_storage: state,
+    analytics_storage: state,
+  });
+}
+
 export function grantAnalyticsConsent(): void {
   initConsentMode();
-  window.gtag?.('consent', 'update', {
-    ad_user_data: 'granted',
-    ad_personalization: 'granted',
-    ad_storage: 'granted',
-    analytics_storage: 'granted',
-  });
+  updateConsent('granted');
 
   if (analyticsLoaded) return;
   analyticsLoaded = true;
@@ -65,4 +75,8 @@ export function grantAnalyticsConsent(): void {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
   const firstScript = document.getElementsByTagName('script')[0];
   firstScript.parentNode?.insertBefore(script, firstScript);
+}
+
+export function revokeAnalyticsConsent(): void {
+  updateConsent('denied');
 }

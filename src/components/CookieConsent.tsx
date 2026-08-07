@@ -1,34 +1,52 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
-import { getConsent, saveConsent, initConsentMode, grantAnalyticsConsent } from '../lib/consent';
+import { getConsent, saveConsent, initConsentMode, grantAnalyticsConsent, revokeAnalyticsConsent, COOKIE_SETTINGS_EVENT } from '../lib/consent';
 import type { ConsentChoice } from '../lib/consent';
 import type { Lang } from '../hooks/useI18n';
 import { cookieI18n } from '../i18n/cookie';
 
 export function CookieConsent({ lang }: { lang: Lang }) {
-  const [status, setStatus] = useState<ConsentChoice | null>(() => getConsent());
+  const [choice, setChoice] = useState<ConsentChoice | null>(() => getConsent());
+  const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef(0);
 
   useEffect(() => {
     initConsentMode();
-    if (status === 'accepted') grantAnalyticsConsent();
+    if (choice === 'accepted') grantAnalyticsConsent();
     return () => window.clearTimeout(timerRef.current);
-  }, [status]);
+  }, [choice]);
+
+  const showBanner = choice === null || visible;
 
   useEffect(() => {
-    if (status === null) bannerRef.current?.focus({ preventScroll: true });
-  }, [status]);
+    if (showBanner) bannerRef.current?.focus({ preventScroll: true });
+  }, [showBanner]);
 
-  if (status !== null) return null;
+  useEffect(() => {
+    const onOpen = () => {
+      window.clearTimeout(timerRef.current);
+      setClosing(false);
+      setVisible(true);
+    };
+    window.addEventListener(COOKIE_SETTINGS_EVENT, onOpen);
+    return () => window.removeEventListener(COOKIE_SETTINGS_EVENT, onOpen);
+  }, []);
+
+  if (!showBanner) return null;
 
   const t = cookieI18n[lang];
 
-  const decide = (choice: ConsentChoice) => {
-    saveConsent(choice);
+  const decide = (next: ConsentChoice) => {
+    saveConsent(next);
+    if (next === 'declined' && choice === 'accepted') revokeAnalyticsConsent();
     setClosing(true);
-    timerRef.current = window.setTimeout(() => setStatus(choice), 320);
+    timerRef.current = window.setTimeout(() => {
+      setClosing(false);
+      setVisible(false);
+      setChoice(next);
+    }, 320);
   };
 
   return (

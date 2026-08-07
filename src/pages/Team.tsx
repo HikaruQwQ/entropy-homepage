@@ -194,7 +194,7 @@ export function Team() {
         </section>
       </main>
 
-      <Footer disclaimer={t('disclaimer')} />
+      <Footer disclaimer={t('disclaimer')} cookieSettingsLabel={t('cookieSettings')} />
       <ScrollTop visible={showScrollTop} />
       <CookieConsent lang={lang} />
     </>

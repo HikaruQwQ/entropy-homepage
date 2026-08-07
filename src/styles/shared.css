@@ -265,6 +265,17 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-text-muted);
   transition: color var(--transition);
 }
+.footer-cookie-btn {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition);
+}
 .footer-social {
   display: inline-flex;
   align-items: center;
@@ -403,6 +414,7 @@ a { color: inherit; text-decoration: none; }
   .theme-toggle:hover { opacity: 0.8; }
   .scroll-top:hover { transform: translateY(-3px); }
   .footer-link:hover,
+  .footer-cookie-btn:hover,
   .footer-social:hover { color: var(--color-text); }
   .footer-social:hover { transform: translateY(-2px); }
   .cookie-banner-accept:hover { opacity: 0.85; }
