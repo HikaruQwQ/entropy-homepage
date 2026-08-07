@@ -2,6 +2,7 @@ import type { MouseEvent } from 'react';
 import { Nav } from '../components/Nav';
 import { Footer } from '../components/Footer';
 import { ScrollTop } from '../components/ScrollTop';
+import { CookieConsent } from '../components/CookieConsent';
 import { Button } from '../components/Button';
 import { ScrollHintIcon, SegmentFaultLogo } from '../components/icons';
 import { useI18n } from '../hooks/useI18n';
@@ -21,7 +22,7 @@ const entryAvatars = [
 ];
 
 export function Home() {
-  const { t, toggleLang, langLabel } = useI18n(homeI18n);
+  const { t, toggleLang, langLabel, lang } = useI18n(homeI18n);
   const { isLight, toggleTheme, toggleLabel } = useTheme();
   useLenis();
   const { scrolled, showScrollTop, activeSection } = useScrollState(true);
@@ -189,6 +190,7 @@ export function Home() {
 
       <Footer disclaimer={t('disclaimer')} />
       <ScrollTop visible={showScrollTop} />
+      <CookieConsent lang={lang} />
     </>
   );
 }
