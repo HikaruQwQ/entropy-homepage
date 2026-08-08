@@ -175,12 +175,21 @@ export function Home() {
           <div className="container">
             <Button asChild className="join-card reveal">
               <a href="mailto:hr@entropy.asia" id="joinCard" aria-label="加入我们">
-                <img src="assets/join_bg.png" alt="JOIN US" width={918} height={308} loading="lazy" decoding="async" />
+                <img src="assets/join_bg.png" alt="" className="join-bg" loading="lazy" decoding="async" />
+                <img
+                  src="assets/rocket.png"
+                  alt=""
+                  className="join-rocket"
+                  loading="lazy"
+                  decoding="async"
+                  aria-hidden="true"
+                />
                 <div className="join-overlay">
                   <div>
                     <p className="join-title">JOIN</p>
                     <p className="join-title">US.</p>
                   </div>
+                  <p className="join-hint">{t('joinHint')}</p>
                 </div>
               </a>
             </Button>

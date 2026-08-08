@@ -26,6 +26,7 @@ export const homeI18n = {
     joinCard1Title: '创造者', joinCard1Body: '无论你是 Coder、Designer 还是 Maker，只要你对创造充满热情，这里就是你的舞台。',
     joinCard2Title: '自由土壤', joinCard2Body: '没有条条框框，没有 KPI 考核，只有纯粹的创作冲动和一群志同道合的伙伴。',
     joinCard3Title: '无限可能', joinCard3Body: '从一个 idea 到一个产品，你将经历 72 小时最密集的创造之旅，收获远超预期。',
+    joinHint: '点按此处，加入我们',
     cookieSettings: 'Cookie 设置',
     disclaimer: '免责声明 本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。'
   },
@@ -56,6 +57,7 @@ export const homeI18n = {
     joinCard1Title: 'Creators', joinCard1Body: 'Whether you are a Coder, Designer, or Maker, if you are passionate about creating, this is your stage.',
     joinCard2Title: 'Free Soil', joinCard2Body: 'No rules, no KPIs — only pure creative impulse and like-minded companions.',
     joinCard3Title: 'Infinite Possibilities', joinCard3Body: 'From an idea to a product, you will experience the most intense 72 hours of creation, gaining far more than expected.',
+    joinHint: 'Tap here to join us',
     cookieSettings: 'Cookie Preferences',
     disclaimer: 'Disclaimer: The AdventureX trademark referenced on this website is owned by Hangzhou Yuxu Technology Co., Ltd.; the TechCrunch trademark is held by Tech Media Holdings International LLC; the SegmentFault trademark is owned by Wuhan Fulin Technology Co., Ltd. This website references the above trademarks solely for narrative and illustrative purposes, not for commercial use, and does not imply any affiliation or partnership with the rights holders. All trademark rights belong to their respective owners.'
   }
