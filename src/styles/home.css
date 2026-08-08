@@ -214,34 +214,47 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   position: relative;
   display: block;
   width: 100%;
+  aspect-ratio: 1836 / 615;
+  container-type: inline-size;
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
   text-decoration: none;
   transition: transform var(--press-transition), opacity 180ms ease;
 }
-.join-card img {
+.join-bg,
+.join-rocket {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: clamp(250px, 35vh, 615px);
+  height: 100%;
   object-fit: cover;
-  display: block;
+}
+.join-rocket {
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 .join-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: clamp(20px, 3vw, 40px) clamp(20px, 3vw, 40px) clamp(40px, 5vw, 60px);
+  padding: 1.2cqw 1.88cqw 2.2cqw;
 }
 .join-title {
   font-family: var(--font-en);
-  font-size: clamp(48px, 8vw, 128px);
+  font-size: 6.97cqw;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.03;
   color: #FFFFFF;
+}
+.join-hint {
+  font-size: 1.31cqw;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
 }
 
 :where(.cta-btn, .team-entry, .join-card):active:not(:focus-visible) {
@@ -280,7 +293,9 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   .origin-quote { font-size: clamp(18px, 5vw, 24px); }
   .welcome-title { font-size: clamp(22px, 6vw, 32px); }
   .join-title { font-size: clamp(36px, 12vw, 64px); }
-  .join-card img { height: 200px; }
+  .join-card { aspect-ratio: auto; height: 200px; container-type: normal; }
+  .join-overlay { padding: 12px 16px 16px; }
+  .join-hint { font-size: 12px; }
   .cta-btn { font-size: 14px; padding: 12px 24px; }
   section { padding: 60px 0; }
   .nav-inner { padding: 10px 16px; gap: 12px; }
