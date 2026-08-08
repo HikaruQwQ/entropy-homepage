@@ -1,6 +1,6 @@
 export const homeI18n = {
   zh: {
-    home: 'Home', about: 'About',
+    home: 'Home', team: 'Team',
     heroLabel: '极星黑客松',
     heroDoing: '我们正在做',
     heroTitle: '一个由中学生创办的黑客松组织\n致力于推动科技创新，促进创新生态发展',
@@ -31,7 +31,7 @@ export const homeI18n = {
     disclaimer: '免责声明 本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。'
   },
   en: {
-    home: 'Home', about: 'About',
+    home: 'Home', team: 'Team',
     heroLabel: 'Polaris Hackathon',
     heroDoing: 'We are working on',
     heroTitle: 'A hackathon organization founded by students\nDedicated to driving tech innovation and fostering a creative ecosystem',

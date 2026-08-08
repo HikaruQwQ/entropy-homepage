@@ -4,6 +4,7 @@ import { Footer } from '../components/Footer';
 import { ScrollTop } from '../components/ScrollTop';
 import { CookieConsent } from '../components/CookieConsent';
 import { Button } from '../components/Button';
+import { useToast } from '../components/Toast';
 import { ScrollHintIcon, SegmentFaultLogo } from '../components/icons';
 import { useI18n } from '../hooks/useI18n';
 import { useTheme } from '../hooks/useTheme';
@@ -22,11 +23,17 @@ const entryAvatars = [
 ];
 
 export function Home() {
-  const { t, toggleLang, langLabel, lang } = useI18n(homeI18n);
+  const { t, toggleLang, langLabel, lang, getLangSwitchMessage } = useI18n(homeI18n);
   const { isLight, toggleTheme, toggleLabel } = useTheme();
+  const { showToast } = useToast();
   useLenis();
   const { scrolled, showScrollTop, activeSection } = useScrollState(true);
   useHomeAnimations();
+
+  const handleToggleLang = () => {
+    toggleLang();
+    showToast(getLangSwitchMessage());
+  };
 
   const handleNavClick = (href: string, event: MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith('#') && href.length > 1) {
@@ -47,10 +54,10 @@ export function Home() {
         onLinkClick={handleNavClick}
         links={[
           { href: '#home', label: t('home'), sectionId: 'home' },
-          { href: '#about', label: t('about'), sectionId: 'about' },
+          { href: 'team.html', label: t('team') },
         ]}
         langLabel={langLabel}
-        onToggleLang={toggleLang}
+        onToggleLang={handleToggleLang}
         themePressed={isLight}
         themeLabel={toggleLabel}
         onToggleTheme={toggleTheme}
