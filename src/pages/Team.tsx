@@ -4,6 +4,7 @@ import { Footer } from '../components/Footer';
 import { ScrollTop } from '../components/ScrollTop';
 import { CookieConsent } from '../components/CookieConsent';
 import { Button } from '../components/Button';
+import { useToast } from '../components/Toast';
 import { useI18n } from '../hooks/useI18n';
 import { useTheme } from '../hooks/useTheme';
 import { useLenis } from '../hooks/useLenis';
@@ -130,12 +131,18 @@ function TeamCard({
 }
 
 export function Team() {
-  const { t, toggleLang, langLabel, lang } = useI18n(teamI18n);
+  const { t, toggleLang, langLabel, lang, getLangSwitchMessage } = useI18n(teamI18n);
   const { isLight, toggleTheme, toggleLabel } = useTheme();
+  const { showToast } = useToast();
   useLenis();
   const { scrolled, showScrollTop } = useScrollState(false);
   useTeamAnimations();
   const [activeMember, setActiveMember] = useState<string | null>(null);
+
+  const handleToggleLang = () => {
+    toggleLang();
+    showToast(getLangSwitchMessage());
+  };
 
   return (
     <>
@@ -147,7 +154,7 @@ export function Team() {
           { href: 'team.html', label: t('team') },
         ]}
         langLabel={langLabel}
-        onToggleLang={toggleLang}
+        onToggleLang={handleToggleLang}
         themePressed={isLight}
         themeLabel={toggleLabel}
         onToggleTheme={toggleTheme}
