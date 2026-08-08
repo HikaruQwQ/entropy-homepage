@@ -47,7 +47,7 @@ export function Home() {
         onLinkClick={handleNavClick}
         links={[
           { href: '#home', label: t('home'), sectionId: 'home' },
-          { href: '#about', label: t('about'), sectionId: 'about' },
+          { href: 'team.html', label: t('team') },
         ]}
         langLabel={langLabel}
         onToggleLang={toggleLang}

@@ -144,7 +144,7 @@ export function Team() {
         scrolled={scrolled}
         links={[
           { href: 'index.html#home', label: t('home') },
-          { href: 'index.html#about', label: t('about') },
+          { href: 'team.html', label: t('team') },
         ]}
         langLabel={langLabel}
         onToggleLang={toggleLang}

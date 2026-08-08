@@ -1,6 +1,6 @@
 export const teamI18n = {
   zh: {
-    home: 'Home', about: 'About',
+    home: 'Home', team: 'Team',
     teamLabel: '团队',
     teamTitle: '同频共振',
     teamBody: '任何一个伟大的事业都不可能一个人完成。这里是一群愿意每周投入十几个小时、为同一个愿景坚持的年轻人。',
@@ -25,7 +25,7 @@ export const teamI18n = {
     disclaimer: '免责声明 本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。'
   },
   en: {
-    home: 'Home', about: 'About',
+    home: 'Home', team: 'Team',
     teamLabel: 'Team',
     teamTitle: 'In Resonance',
     teamBody: 'No great endeavor is ever completed alone. Here is a group of young people willing to devote over a dozen hours every week, holding fast to a shared vision.',
