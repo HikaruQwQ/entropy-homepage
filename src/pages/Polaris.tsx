@@ -8,8 +8,15 @@ import { useI18n } from '../hooks/useI18n';
 import { useTheme } from '../hooks/useTheme';
 import { useLenis } from '../hooks/useLenis';
 import { useScrollState } from '../hooks/useScrollState';
-import { usePolarisAnimations } from '../hooks/useRevealAnimations';
+import { usePolarisAnimations, useSponsorGridReveal } from '../hooks/useRevealAnimations';
 import { polarisI18n } from '../i18n/polaris';
+import { useEffect, useState } from 'react';
+
+interface Sponsor {
+  name: string;
+  url: string;
+  logo: { dark: string; light: string };
+}
 
 export function Polaris() {
   const { t, toggleLang, langLabel, lang, getLangSwitchMessage } = useI18n(polarisI18n);
@@ -18,6 +25,21 @@ export function Polaris() {
   useLenis();
   const { scrolled, showScrollTop } = useScrollState(false);
   usePolarisAnimations();
+
+  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    fetch('sponsor.json')
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data: Sponsor[]) => {
+        if (!cancelled && Array.isArray(data)) setSponsors(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  useSponsorGridReveal(sponsors.length > 0);
 
   const handleToggleLang = () => {
     toggleLang();
@@ -127,6 +149,109 @@ export function Polaris() {
                 </p>
                 <p className="polaris-origin-em">{t('originQuote2')}</p>
               </div>
+            </div>
+          </section>
+
+          <section className="polaris-welcome">
+            <div className="container">
+              <p className="eyebrow reveal">{t('welcomeEyebrow')}</p>
+              <h2 className="polaris-welcome-title reveal">
+                <span>{t('welcomeTitlePre')}</span>
+                <img src="assets/polaris27.svg" className="inline-logo polaris-title-logo" alt="polaris.27" />
+                <span>{t('welcomeTitlePost')}</span>
+              </h2>
+              <div className="polaris-welcome-content">
+                <p className="polaris-welcome-body">
+                  <span>{t('welcomeP1Pre')}</span>{' '}
+                  <img src="assets/polaris27.svg" className="inline-logo" alt="polaris.27" />{' '}
+                  <span>{t('welcomeP1Post')}</span>
+                </p>
+                <p className="polaris-welcome-body">{t('welcomeP2')}</p>
+                <div className="polaris-benefits">
+                  <div className="polaris-benefit-card">
+                    <img
+                      className="polaris-benefit-bg"
+                      src="https://webp.entropy.asia/public/hotel.png"
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="polaris-benefit-text">
+                      <p className="polaris-benefit-small">{t('benefitHotelSmall')}</p>
+                      <p className="polaris-benefit-big">{t('benefitHotelBig')}</p>
+                    </div>
+                  </div>
+                  <div className="polaris-benefit-card">
+                    <img
+                      className="polaris-benefit-bg"
+                      src="https://webp.entropy.asia/public/train.png"
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="polaris-benefit-text">
+                      <p className="polaris-benefit-small">{t('benefitTrainSmall')}</p>
+                      <p className="polaris-benefit-big">{t('benefitTrainBig')}</p>
+                    </div>
+                  </div>
+                  <div className="polaris-benefit-card">
+                    <img
+                      className="polaris-benefit-bg"
+                      src="https://webp.entropy.asia/public/food.png"
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="polaris-benefit-text">
+                      <p className="polaris-benefit-big">{t('benefitFoodBig')}</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="polaris-welcome-body">{t('welcomeClosing')}</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="polaris-partners">
+            <div className="container">
+              <p className="eyebrow reveal">{t('partnersEyebrow')}</p>
+              <h2 className="polaris-partners-title reveal">{t('partnersTitle')}</h2>
+              <p className="polaris-partners-body reveal">{t('partnersP1')}</p>
+              <p className="polaris-partners-body reveal">
+                <span>{t('partnersP2Pre')}</span>{' '}
+                <img src="assets/polaris27.svg" className="inline-logo" alt="polaris.27" />{' '}
+                <span>{t('partnersP2Post')}</span>
+              </p>
+              {sponsors.length > 0 && (
+                <div className="polaris-sponsors">
+                  {sponsors.map((sponsor) => (
+                    <a
+                      key={sponsor.name}
+                      className="polaris-sponsor-card"
+                      href={sponsor.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={sponsor.name}
+                    >
+                      <img
+                        className="polaris-sponsor-logo"
+                        src={isLight ? sponsor.logo.light : sponsor.logo.dark}
+                        alt={sponsor.name}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                  ))}
+                </div>
+              )}
+              <p className="polaris-partners-body polaris-partners-cta reveal">
+                <span>{t('partnersCtaPre')}</span>{' '}
+                <a className="polaris-partners-mail" href="mailto:support@entropy.asia">support@entropy.asia</a>{' '}
+                <span>{t('partnersCtaPost')}</span>
+              </p>
             </div>
           </section>
         </div>

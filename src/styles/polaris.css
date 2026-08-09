@@ -194,6 +194,121 @@
   filter: none;
 }
 
+.polaris-welcome {
+  padding: 0 0 clamp(80px, 10vh, 160px);
+}
+.polaris-welcome-title,
+.polaris-partners-title {
+  font-family: var(--font-cn);
+  font-size: clamp(26px, 3.02vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 6px;
+}
+.polaris-title-logo {
+  height: 1em;
+  vertical-align: -0.12em;
+  margin: 0 0.15em;
+}
+.polaris-welcome-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+  margin-top: clamp(20px, 1.61vw, 31px);
+  font-size: clamp(15px, 1.67vw, 32px);
+}
+.polaris-welcome-body { line-height: 1.8; }
+.polaris-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.35vw, 26px);
+}
+.polaris-benefit-card {
+  position: relative;
+  aspect-ratio: 600 / 324;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FFFFFF;
+  background: #000000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.polaris-benefit-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.polaris-benefit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.polaris-benefit-text {
+  position: relative;
+  z-index: 1;
+  padding: 0 12px;
+}
+.polaris-benefit-small {
+  font-size: clamp(12px, 1.25vw, 24px);
+  font-weight: 400;
+  line-height: 1.8;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+.polaris-benefit-big {
+  font-size: clamp(18px, 2.5vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  white-space: pre-line;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.polaris-partners {
+  padding: 0 0 clamp(80px, 10vh, 160px);
+}
+.polaris-partners-title {
+  margin-bottom: clamp(20px, 1.61vw, 31px);
+}
+.polaris-partners-body {
+  line-height: 1.8;
+  font-size: clamp(15px, 1.67vw, 32px);
+}
+.polaris-partners-body + .polaris-partners-body { margin-top: 1.8em; }
+.polaris-partners-cta { margin-top: clamp(16px, 1.35vw, 26px); }
+.polaris-partners-mail { transition: opacity 160ms ease; }
+.polaris-sponsors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 1.72vw, 33px);
+  margin-top: 1.8em;
+}
+.polaris-sponsor-card {
+  flex: 0 1 clamp(240px, 20.83vw, 400px);
+  height: clamp(90px, 7.5vw, 144px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: transform var(--press-transition), border-color var(--transition);
+}
+.polaris-sponsor-logo {
+  width: auto;
+  height: auto;
+  max-width: 75%;
+  max-height: 45%;
+}
+
 @media (max-width: 900px) {
   .polaris-banner { padding: 8px 20px; }
 }
@@ -213,6 +328,19 @@
   .polaris-stat-value { font-size: clamp(48px, 13vw, 72px); }
   .polaris-origin-title { font-size: clamp(22px, 6vw, 32px); }
   .polaris-origin-content { font-size: clamp(14px, 4vw, 18px); gap: 1.6em; }
+  .polaris-welcome-title,
+  .polaris-partners-title { font-size: clamp(22px, 6vw, 32px); }
+  .polaris-welcome-content { font-size: clamp(14px, 4vw, 18px); gap: 1.6em; }
+  .polaris-benefits { grid-template-columns: 1fr; gap: 12px; }
+  .polaris-benefit-small { font-size: 18px; }
+  .polaris-benefit-big { font-size: 27px; }
+  .polaris-partners-body { font-size: clamp(14px, 4vw, 18px); }
+  .polaris-sponsor-card { flex-basis: 100%; height: 110px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .polaris-sponsor-card:hover { transform: translateY(-2px); border-color: var(--color-text-muted); }
+  .polaris-partners-mail:hover { opacity: 0.7; }
 }
 
 @media (max-width: 375px) {
