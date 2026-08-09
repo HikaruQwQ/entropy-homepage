@@ -1,6 +1,7 @@
 export const polarisI18n = {
   zh: {
     home: '首页', team: '团队', polaris: '极星黑客松',
+    previewBanner: '本页面为预览版本，活动具体信息尚未最终确定，可能发生变化。',
     heroEyebrow: '极星黑客松',
     heroIntro: '一场由中学生举办的公益黑客松，将于 2027 年 2 月在杭州举办\n致力于推动科技创新，促进创新生态发展',
     overviewEyebrow: '前瞻',
@@ -28,6 +29,7 @@ export const polarisI18n = {
   },
   en: {
     home: 'Home', team: 'Team', polaris: 'Polaris',
+    previewBanner: 'This page is a preview. Event details are not final and subject to change.',
     heroEyebrow: 'Polaris Hackathon',
     heroIntro: 'A public-interest hackathon organized by middle school students, coming to Hangzhou in February 2027\nDedicated to driving technological innovation and a thriving innovation ecosystem',
     overviewEyebrow: 'Preview',
