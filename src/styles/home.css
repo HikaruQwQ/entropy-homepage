@@ -2,6 +2,19 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
 
 .hero {
   padding-top: calc(var(--nav-height) + clamp(24px, 2.4vw, 46px));
+  /* 首屏恰好占满一屏：黑色 logo 面板弹性吸收剩余高度，保证标题始终完整可见 */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.hero .container {
+  /* width:100% 必须显式声明：父级是 column flex 时，
+     container 的 margin:auto 会取消交叉轴 stretch，导致收缩为内容宽度 */
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .polaris-banner {
   position: relative;
@@ -53,10 +66,11 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
 }
 .hero-entropy {
   margin-top: clamp(16px, 1.4vw, 27px);
+  flex: 1;
+  min-height: clamp(240px, 34vh, 640px);
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 3 / 1;
   background: #000000;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -238,14 +252,17 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   }
   .hero {
     padding-top: calc(var(--nav-height) + 16px);
+    min-height: auto;
+    display: block;
   }
+  .hero .container { display: block; flex: none; }
   .polaris-banner { height: 76px; padding: 0 20px; }
   .polaris-banner-logo { height: 36px; }
   .polaris-banner-cta { font-size: 14px; }
   .polaris-banner-cta svg { height: 14px; }
-  .hero-entropy { aspect-ratio: 2 / 1; }
+  .hero-entropy { flex: none; min-height: 0; aspect-ratio: 2 / 1; }
   .hero-entropy img { width: 62%; }
-  .hero-title { font-size: clamp(18px, 5.5vw, 28px); }
+  .hero-title { font-size: clamp(24px, 7vw, 34px); }
   .section-title { font-size: clamp(22px, 6vw, 32px); }
   .team-block-title { font-size: clamp(20px, 5.5vw, 28px); }
   .team-block-body, .welcome-body { font-size: clamp(14px, 4vw, 18px); }
@@ -262,6 +279,5 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   :root {
     --container-pad: 16px;
   }
-  .hero-title { font-size: 16px; }
   .join-title { font-size: 32px; }
 }
