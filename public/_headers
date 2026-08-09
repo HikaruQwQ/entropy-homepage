@@ -1,0 +1,29 @@
+/assets/*.avif
+  Cache-Control: public, max-age=259200
+
+/assets/*.gif
+  Cache-Control: public, max-age=259200
+
+/assets/*.ico
+  Cache-Control: public, max-age=259200
+
+/assets/*.jpeg
+  Cache-Control: public, max-age=259200
+
+/assets/*.jpg
+  Cache-Control: public, max-age=259200
+
+/assets/*.png
+  Cache-Control: public, max-age=259200
+
+/assets/*.svg
+  Cache-Control: public, max-age=259200
+
+/assets/*.webp
+  Cache-Control: public, max-age=259200
+
+/assets/team/*.jpeg
+  Cache-Control: public, max-age=259200
+
+/assets/team/*.jpg
+  Cache-Control: public, max-age=259200
