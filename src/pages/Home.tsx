@@ -5,7 +5,7 @@ import { ScrollTop } from '../components/ScrollTop';
 import { CookieConsent } from '../components/CookieConsent';
 import { Button } from '../components/Button';
 import { useToast } from '../components/Toast';
-import { ScrollHintIcon, SegmentFaultLogo } from '../components/icons';
+import { ChevronRightIcon } from '../components/icons';
 import { useI18n } from '../hooks/useI18n';
 import { useTheme } from '../hooks/useTheme';
 import { useLenis } from '../hooks/useLenis';
@@ -66,28 +66,31 @@ export function Home() {
 
       <main>
         <section id="home" className="hero">
-          <div className="hero-image-wrap">
-            <img
-              src="assets/hero_bg.png"
-              alt="极星黑客松主视觉"
-              width={916}
-              height={307}
-              loading="eager"
-              decoding="async"
-              {...({ fetchpriority: 'high' } as Record<string, string>)}
-            />
-            <div className="hero-logo">
-              <img src="assets/polaris_logo.svg" alt="POLARIS" />
-            </div>
-          </div>
-          <div className="container hero-content">
-            <p className="hero-eyebrow reveal">{t('heroLabel')}</p>
-            <h1 className="hero-title reveal">{t('heroTitle')}</h1>
-            <Button asChild className="cta-btn reveal">
-              <a href="polaris.html">{t('heroCta')}</a>
+          <div className="container">
+            <Button asChild className="polaris-banner reveal">
+              <a href="polaris.html">
+                <img
+                  className="polaris-banner-bg"
+                  src="assets/polaris.png"
+                  alt=""
+                  aria-hidden="true"
+                  loading="eager"
+                  decoding="async"
+                  {...({ fetchpriority: 'high' } as Record<string, string>)}
+                />
+                <img className="polaris-banner-logo" src="assets/polaris27.svg" alt="polaris.27" />
+                <span className="polaris-banner-cta">
+                  {t('heroCta')}
+                  <ChevronRightIcon />
+                </span>
+              </a>
             </Button>
-            <div className="scroll-hint reveal">
-              <ScrollHintIcon />
+            <div className="hero-entropy reveal">
+              <img src="assets/entropy_logo.svg" alt="_entropy" />
+            </div>
+            <div className="hero-intro">
+              <p className="eyebrow reveal">{t('entropy')}</p>
+              <h1 className="hero-title reveal">{t('entropyBody')}</h1>
             </div>
           </div>
         </section>
@@ -95,10 +98,6 @@ export function Home() {
         <section id="about" className="section-alt">
           <div className="container">
             <div className="team-section">
-              <div className="team-block reveal">
-                <p className="eyebrow">{t('entropy')}</p>
-                <p className="team-block-body">{t('entropyBody')}</p>
-              </div>
               <div className="team-block reveal">
                 <p className="eyebrow">{t('tech')}</p>
                 <h3 className="team-block-title">
@@ -113,34 +112,6 @@ export function Home() {
                   <span>{t('artBodyText')}</span>
                 </p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="origin" className="section-alt">
-          <div className="container">
-            <p className="eyebrow reveal">{t('origin')}</p>
-            <h2 className="section-title reveal">{t('originTitle')}</h2>
-            <div className="origin-content">
-              <p className="origin-body">{t('originSpark')}</p>
-              <p className="origin-body">
-                <span>{t('originP0')}</span>{' '}
-                <img src="assets/tc-lockup-hp.svg" className="inline-logo" alt="TechCrunch" />{' '}
-                <span>{t('originP0Post')}</span>
-              </p>
-              <p className="origin-body">
-                <span>{t('originP05Pre')}</span>
-                <SegmentFaultLogo />
-                <span>{t('originP05Post')}</span>
-              </p>
-              <p className="origin-body">
-                <span>{t('originP1Pre')}</span>
-                <img src="assets/adventure-x.svg" className="inline-logo" alt="AdventureX" />
-                <span>{t('originP1Post')}</span>
-              </p>
-              <p className="origin-quote">{t('originQuote')}</p>
-              <p className="origin-body">{t('originP2')}</p>
-              <p className="origin-quote">{t('originQuote2')}</p>
             </div>
           </div>
         </section>

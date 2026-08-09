@@ -1,64 +1,69 @@
 section { padding: clamp(60px, 8vh, 120px) 0; }
 
-.scroll-hint {
+.hero {
+  padding-top: calc(var(--nav-height) + clamp(24px, 2.4vw, 46px));
+}
+.polaris-banner {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: clamp(30px, 4vh, 50px);
-  opacity: 0.3;
-  color: var(--color-text);
-}
-.cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: clamp(20px, 3vh, 40px);
-  padding: clamp(12px, 1.5vw, 20px) clamp(24px, 3vw, 40px);
-  font-family: var(--font-en);
-  font-size: clamp(14px, 1.2vw, 20px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--color-bg);
-  background: var(--color-text);
-  border-radius: 100px;
-  border: none;
-  cursor: pointer;
+  justify-content: space-between;
+  gap: 16px;
+  height: clamp(84px, 7.1vw, 136px);
+  padding: 0 clamp(24px, 2.7vw, 52px) 0 clamp(20px, 2.2vw, 42px);
+  background: #000000;
+  border-radius: var(--radius);
+  overflow: hidden;
   transition: transform var(--press-transition), opacity 180ms ease;
 }
-
-.hero {
-  padding-top: clamp(100px, 12vh, 140px);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-image-wrap {
-  position: relative;
-  width: 100%;
-  height: clamp(300px, 40vh, 614px);
-  overflow: hidden;
-  margin-bottom: clamp(20px, 3vh, 40px);
-}
-.hero-image-wrap img {
-  width: 100%;
-  height: 122%;
-  object-fit: cover;
-  will-change: transform;
-}
-.hero-logo {
+.polaris-banner-bg {
   position: absolute;
-  bottom: 5%;
-  left: 3%;
-  z-index: 2;
+  left: 26.61%;
+  top: -110.12%;
+  width: 94.46%;
+  height: 419.64%;
+  object-fit: fill;
+  opacity: 0.75;
+  pointer-events: none;
 }
-.hero-logo img { height: clamp(40px, 8vw, 120px); width: auto; }
-.hero-eyebrow {
-  font-size: clamp(14px, 1.3vw, 24px);
-  font-weight: 500;
-  color: var(--color-text-dim);
-  margin-bottom: 8px;
+.polaris-banner-logo {
+  position: relative;
+  height: clamp(40px, 3.55vw, 68px);
+  width: auto;
 }
+.polaris-banner-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 0.3vw, 6px);
+  font-size: clamp(14px, 1.7vw, 32px);
+  font-weight: 400;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+.polaris-banner-cta svg {
+  height: clamp(14px, 1.25vw, 24px);
+  width: auto;
+  transition: transform 200ms var(--ease-out);
+  animation: cta-arrow-nudge 1.6s ease-in-out infinite;
+}
+@keyframes cta-arrow-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+.hero-entropy {
+  margin-top: clamp(16px, 1.4vw, 27px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3 / 1;
+  background: #000000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.hero-entropy img { width: clamp(180px, 41%, 785px); }
+.hero-intro { margin-top: clamp(24px, 2.2vw, 43px); }
+.hero-intro .eyebrow { margin-bottom: clamp(12px, 0.9vw, 18px); }
 .hero-title {
   font-family: var(--font-cn);
   font-size: clamp(20px, 3vw, 60px);
@@ -103,43 +108,6 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   height: clamp(19px, 2.4vw, 46px);
   vertical-align: -0.12em;
 }
-.inline-logo {
-  height: 1.1em;
-  width: auto;
-  vertical-align: -0.2em;
-  display: inline-block;
-  margin: 0 0.1em;
-  -webkit-user-drag: none;
-  user-drag: none;
-}
-[data-theme="light"] .inline-logo { filter: invert(1); }
-.inline-logo.sf-logo {
-  height: 1.2em;
-  vertical-align: -0.32em;
-  color: #FFFFFF;
-}
-[data-theme="light"] .inline-logo.sf-logo {
-  color: #000000;
-  filter: none;
-}
-
-.origin-body {
-  font-size: clamp(16px, 1.7vw, 32px);
-  line-height: 1.8;
-  max-width: 100%;
-  margin-top: 24px;
-}
-.origin-quote {
-  font-family: var(--font-cn);
-  font-size: clamp(24px, 3.5vw, 48px);
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--color-accent);
-  margin: clamp(24px, 3vh, 48px) 0;
-  padding-left: clamp(16px, 2vw, 32px);
-  border-left: 3px solid var(--color-accent);
-}
-
 .welcome-section { text-align: left; }
 .welcome-title {
   font-family: var(--font-cn);
@@ -245,11 +213,12 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   color: rgba(255,255,255,0.7);
 }
 
-:where(.cta-btn, .team-entry, .join-card):active:not(:focus-visible) {
+:where(.polaris-banner, .team-entry, .join-card):active:not(:focus-visible) {
   transform: scale(0.97);
 }
 @media (hover: hover) and (pointer: fine) {
-  .cta-btn:hover { transform: translateY(-2px); opacity: 0.85; }
+  .polaris-banner:hover { transform: translateY(-2px); opacity: 0.92; }
+  .polaris-banner:hover .polaris-banner-cta svg { animation: none; transform: translateX(5px); }
   .team-entry:hover { transform: translateY(-2px); border-color: var(--color-accent); opacity: 0.95; }
   .team-entry:hover .avatar-group-item,
   .team-entry:hover .avatar-group-more { transform: translateX(2px); }
@@ -258,7 +227,7 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   .footer-link:hover { color: var(--color-text); }
 }
 @media (prefers-reduced-motion: reduce) {
-  :where(.cta-btn, .team-entry, .join-card) {
+  :where(.polaris-banner, .team-entry, .join-card) {
     transform: none !important;
   }
 }
@@ -268,23 +237,23 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
     --container-pad: 20px;
   }
   .hero {
-    padding-top: 80px;
-    min-height: auto;
+    padding-top: calc(var(--nav-height) + 16px);
   }
-  .hero-image-wrap img { height: 100%; }
-  .hero-image-wrap { height: 240px; }
-  .hero-logo img { height: 48px; }
+  .polaris-banner { height: 76px; padding: 0 20px; }
+  .polaris-banner-logo { height: 36px; }
+  .polaris-banner-cta { font-size: 14px; }
+  .polaris-banner-cta svg { height: 14px; }
+  .hero-entropy { aspect-ratio: 2 / 1; }
+  .hero-entropy img { width: 62%; }
   .hero-title { font-size: clamp(18px, 5.5vw, 28px); }
   .section-title { font-size: clamp(22px, 6vw, 32px); }
   .team-block-title { font-size: clamp(20px, 5.5vw, 28px); }
-  .team-block-body, .origin-body, .welcome-body { font-size: clamp(14px, 4vw, 18px); }
-  .origin-quote { font-size: clamp(18px, 5vw, 24px); }
+  .team-block-body, .welcome-body { font-size: clamp(14px, 4vw, 18px); }
   .welcome-title { font-size: clamp(22px, 6vw, 32px); }
   .join-title { font-size: clamp(36px, 12vw, 64px); }
   .join-card { aspect-ratio: auto; height: 200px; container-type: normal; }
   .join-overlay { padding: 12px 16px 16px; }
   .join-hint { font-size: 12px; }
-  .cta-btn { font-size: 14px; padding: 12px 24px; }
   section { padding: 60px 0; }
   .nav-inner { padding: 10px 16px; gap: 12px; }
   .nav-logo img { height: 26px; }

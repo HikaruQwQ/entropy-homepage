@@ -19,7 +19,7 @@ export function useHomeAnimations() {
     }
 
     const ctx = gsap.context(() => {
-      const heroEls = document.querySelectorAll('.hero-content .reveal');
+      const heroEls = document.querySelectorAll('.hero .reveal');
       gsap
         .timeline({ delay: 0.2 })
         .fromTo(
@@ -29,7 +29,7 @@ export function useHomeAnimations() {
         );
 
       gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
-        if (el.closest('.hero-content')) return;
+        if (el.closest('.hero')) return;
         gsap.fromTo(
           el,
           { opacity: 0, y: 20 },
@@ -56,27 +56,6 @@ export function useHomeAnimations() {
             scrollTrigger: { trigger: wrap, start: 'top 80%', once: true },
           }
         );
-      });
-
-      gsap.to('.hero-image-wrap img', {
-        yPercent: -10,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 },
-      });
-
-      gsap.to('.hero-logo', {
-        yPercent: 20,
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
-      });
-
-      gsap.to('.scroll-hint', {
-        y: 10,
-        duration: 1.2,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
       });
     });
 
