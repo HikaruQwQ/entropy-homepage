@@ -76,7 +76,6 @@ export function Home() {
               decoding="async"
               {...({ fetchpriority: 'high' } as Record<string, string>)}
             />
-            <span className="hero-doing">{t('heroDoing')}</span>
             <div className="hero-logo">
               <img src="assets/polaris_logo.svg" alt="POLARIS" />
             </div>

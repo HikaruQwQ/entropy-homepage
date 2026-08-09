@@ -46,18 +46,6 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
   object-fit: cover;
   will-change: transform;
 }
-.hero-doing {
-  position: absolute;
-  top: clamp(12px, 3vh, 28px);
-  left: 3%;
-  z-index: 3;
-  font-family: var(--font-cn);
-  font-size: clamp(11px, 1vw, 16px);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.45);
-  pointer-events: none;
-}
 .hero-logo {
   position: absolute;
   bottom: 5%;

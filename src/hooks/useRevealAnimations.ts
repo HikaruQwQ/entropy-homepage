@@ -64,12 +64,6 @@ export function useHomeAnimations() {
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 },
       });
 
-      gsap.to('.hero-doing', {
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: '30% top', scrub: true },
-      });
-
       gsap.to('.hero-logo', {
         yPercent: 20,
         opacity: 0,

@@ -2,7 +2,6 @@ export const homeI18n = {
   zh: {
     home: '首页', team: '团队', polaris: '极星黑客松',
     heroLabel: '极星黑客松',
-    heroDoing: '我们正在做',
     heroTitle: '一个由中学生创办的黑客松组织\n致力于推动科技创新，促进创新生态发展',
     heroCta: '了解此活动 →',
     entropy: '熵序', entropyBody: '一个由中学生组成，结合技术和艺术的多领域团队\n探索未知边界，寻找技术和人文的十字路口',
@@ -33,7 +32,6 @@ export const homeI18n = {
   en: {
     home: 'Home', team: 'Team', polaris: 'Polaris',
     heroLabel: 'Polaris Hackathon',
-    heroDoing: 'We are working on',
     heroTitle: 'A hackathon organization founded by students\nDedicated to driving tech innovation and fostering a creative ecosystem',
     heroCta: 'Learn more →',
     entropy: 'What is _entropy?', entropyBody: '_entropy is a multi-disciplinary team of students combining technology and art\nExploring unknown boundaries, finding the intersection of tech and humanities',
