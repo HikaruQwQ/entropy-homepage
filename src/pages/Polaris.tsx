@@ -52,7 +52,7 @@ export function Polaris() {
             <div className="polaris-hero-card reveal">
               <img
                 className="polaris-hero-bg"
-                src="assets/polaris.png"
+                src="https://webp.entropy.asia/public/polaris.png"
                 alt=""
                 aria-hidden="true"
                 loading="eager"

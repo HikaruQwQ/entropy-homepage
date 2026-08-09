@@ -182,7 +182,7 @@ export function Team() {
             <div className="team-hero-banner reveal">
               <img
                 className="team-banner-bg"
-                src="assets/join_bg.png"
+                src="https://webp.entropy.asia/public/join_bg.png"
                 alt=""
                 aria-hidden="true"
                 loading="eager"
@@ -191,7 +191,7 @@ export function Team() {
               />
               <img
                 className="team-banner-rocket"
-                src="assets/rocket.png"
+                src="https://webp.entropy.asia/public/rocket.png"
                 alt=""
                 aria-hidden="true"
                 loading="eager"
@@ -261,7 +261,7 @@ export function Team() {
               <div className="team-contact-card team-contact-create reveal">
                 <img
                   className="team-contact-create-bg"
-                  src="assets/creating.png"
+                  src="https://webp.entropy.asia/public/creating.png"
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
