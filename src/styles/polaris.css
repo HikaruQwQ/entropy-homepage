@@ -1,48 +1,183 @@
 .polaris-hero {
-  padding-top: clamp(140px, 18vh, 200px);
-  padding-bottom: clamp(40px, 6vh, 80px);
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
+  padding-top: calc(var(--nav-height) + clamp(24px, 2.4vw, 46px));
+  padding-bottom: clamp(24px, 1.9vw, 36px);
+}
+.polaris-hero-card {
+  position: relative;
+  aspect-ratio: 1832 / 614;
+  background: #000000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.polaris-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  pointer-events: none;
+}
+.polaris-hero-logo {
+  position: absolute;
+  left: clamp(16px, 1.77vw, 34px);
+  bottom: clamp(16px, 2.4vw, 46px);
+  height: clamp(56px, 8.4vw, 161px);
+  width: auto;
+}
+.polaris-hero .eyebrow {
+  margin-top: clamp(24px, 2.2vw, 42px);
+  margin-bottom: clamp(10px, 0.94vw, 18px);
 }
 .polaris-hero-title {
   font-family: var(--font-cn);
-  font-size: clamp(36px, 7vw, 96px);
+  font-size: clamp(22px, 3.125vw, 60px);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: clamp(16px, 2vh, 28px);
-}
-.polaris-hero-body {
-  font-size: clamp(16px, 1.6vw, 28px);
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  max-width: 820px;
-  margin-bottom: clamp(32px, 4vh, 56px);
-}
-.polaris-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-en);
-  font-size: clamp(15px, 1.3vw, 20px);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--color-text);
-  opacity: 0.6;
-  padding: 14px 28px;
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  transition: opacity 180ms ease, transform var(--press-transition), border-color 180ms ease;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  white-space: pre-line;
 }
 
-:where(.polaris-back-link):active:not(:focus-visible) {
-  transform: scale(0.97);
+.polaris-main {
+  position: relative;
+  background: #000000;
+  overflow: clip;
 }
-@media (hover: hover) and (pointer: fine) {
-  .polaris-back-link:hover { opacity: 1; transform: translateY(-2px); border-color: var(--color-accent); }
+[data-theme="light"] .polaris-main { background: #FFFFFF; }
+.polaris-main section { position: relative; }
+
+.polaris-overview {
+  padding: clamp(48px, 6.5vh, 76px) 0 clamp(48px, 6vh, 96px);
 }
-@media (prefers-reduced-motion: reduce) {
-  :where(.polaris-back-link) { transform: none !important; }
+.polaris-overview-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+.polaris-overview-title-en {
+  font-family: var(--font-en);
+  font-size: clamp(26px, 3.125vw, 60px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.polaris-overview-title-sub {
+  font-family: var(--font-cn);
+  font-size: clamp(24px, 3.02vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-accent);
+}
+.polaris-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.04vw, 20px);
+  margin-top: clamp(24px, 2.14vw, 41px);
+}
+.polaris-stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(24px, 2.9vw, 56px);
+  min-height: clamp(160px, 14.375vw, 276px);
+  padding: clamp(14px, 1.04vw, 20px);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.polaris-stat-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: clamp(13px, 1.25vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.polaris-stat-unit {
+  font-family: var(--font-en);
+  text-align: right;
+}
+.polaris-stat-value {
+  font-family: var(--font-en);
+  font-size: clamp(52px, 6.67vw, 128px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.polaris-origin {
+  padding: clamp(48px, 6vh, 96px) 0 clamp(80px, 10vh, 160px);
+}
+.polaris-origin-glow {
+  position: absolute;
+  top: clamp(260px, 22.9vw, 440px);
+  right: -9.9vw;
+  width: 31.35vw;
+  height: 13.38vw;
+  border-radius: 10000px;
+  background: linear-gradient(-67.3148deg, rgb(255, 102, 104) 63.956%, rgba(153, 61, 63, 0) 240.37%);
+  filter: blur(min(500px, 26vw));
+  pointer-events: none;
+}
+.polaris-origin-title {
+  font-family: var(--font-cn);
+  font-size: clamp(26px, 3.02vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 6px;
+}
+.polaris-origin-title-em { color: #FF6668; }
+.polaris-origin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+  margin-top: clamp(20px, 1.61vw, 31px);
+  font-size: clamp(15px, 1.67vw, 32px);
+}
+.polaris-origin-body {
+  line-height: 1.8;
+}
+.polaris-origin-body strong { font-weight: 500; }
+.polaris-origin-em {
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.inline-logo {
+  height: 1.1em;
+  width: auto;
+  vertical-align: -0.2em;
+  display: inline-block;
+  margin: 0 0.1em;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+[data-theme="light"] .inline-logo { filter: invert(1); }
+.inline-logo.sf-logo {
+  height: 1.2em;
+  vertical-align: -0.32em;
+  color: #FFFFFF;
+}
+[data-theme="light"] .inline-logo.sf-logo {
+  color: #000000;
+  filter: none;
+}
+
+@media (max-width: 768px) {
+  .polaris-hero { padding-top: calc(var(--nav-height) + 16px); }
+  .polaris-hero-card { aspect-ratio: 16 / 9; }
+  .polaris-hero-logo { height: clamp(40px, 12vw, 72px); left: 16px; bottom: 16px; }
+  .polaris-hero-title { font-size: clamp(18px, 5.5vw, 28px); }
+  .polaris-overview-title-en { font-size: clamp(22px, 6vw, 32px); }
+  .polaris-overview-title-sub { font-size: clamp(20px, 5.5vw, 30px); }
+  .polaris-stats { grid-template-columns: 1fr; gap: 12px; }
+  .polaris-stat-card { min-height: 150px; gap: 20px; }
+  .polaris-stat-value { font-size: clamp(48px, 13vw, 72px); }
+  .polaris-origin-title { font-size: clamp(22px, 6vw, 32px); }
+  .polaris-origin-content { font-size: clamp(14px, 4vw, 18px); gap: 1.6em; }
 }
