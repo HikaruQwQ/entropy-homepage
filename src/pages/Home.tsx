@@ -71,7 +71,7 @@ export function Home() {
               <a href="polaris.html">
                 <img
                   className="polaris-banner-bg"
-                  src="assets/polaris.png"
+                  src="https://webp.entropy.asia/public/polaris.png"
                   alt=""
                   aria-hidden="true"
                   loading="eager"
@@ -153,9 +153,9 @@ export function Home() {
           <div className="container">
             <Button asChild className="join-card reveal">
               <a href="team.html#become-dreamer" id="joinCard" aria-label="加入我们">
-                <img src="assets/join_bg.png" alt="" className="join-bg" loading="lazy" decoding="async" />
+                <img src="https://webp.entropy.asia/public/join_bg.png" alt="" className="join-bg" loading="lazy" decoding="async" />
                 <img
-                  src="assets/rocket.png"
+                  src="https://webp.entropy.asia/public/rocket.png"
                   alt=""
                   className="join-rocket"
                   loading="lazy"
