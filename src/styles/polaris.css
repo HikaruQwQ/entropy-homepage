@@ -1,5 +1,29 @@
+.polaris-page { --polaris-banner-height: 40px; }
+
+.polaris-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--polaris-banner-height);
+  padding: 8px 40px;
+  background: #ff6668;
+  color: #ffffff;
+  font-size: clamp(12px, 0.9vw, 15px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.polaris-page .nav { top: var(--polaris-banner-height); }
+.polaris-page .nav-overlay { padding-top: calc(var(--nav-height) + var(--polaris-banner-height)); }
+
 .polaris-hero {
-  padding-top: calc(var(--nav-height) + clamp(24px, 2.4vw, 46px));
+  padding-top: calc(var(--nav-height) + var(--polaris-banner-height) + clamp(24px, 2.4vw, 46px));
   padding-bottom: clamp(24px, 1.9vw, 36px);
 }
 .polaris-hero-card {
@@ -123,6 +147,8 @@
   filter: blur(min(500px, 26vw));
   pointer-events: none;
 }
+/* 设计稿为暗色专属资源：白底上超浅渐变会暴露色带/形状轮廓，故日间模式隐藏 */
+[data-theme="light"] .polaris-origin-glow { display: none; }
 .polaris-origin-title {
   font-family: var(--font-cn);
   font-size: clamp(26px, 3.02vw, 58px);
@@ -168,8 +194,14 @@
   filter: none;
 }
 
+@media (max-width: 900px) {
+  .polaris-banner { padding: 8px 20px; }
+}
+
 @media (max-width: 768px) {
-  .polaris-hero { padding-top: calc(var(--nav-height) + 16px); }
+  .polaris-page { --polaris-banner-height: 56px; }
+  .polaris-banner { padding: 6px 20px; }
+  .polaris-hero { padding-top: calc(var(--nav-height) + var(--polaris-banner-height) + 16px); }
   .polaris-hero-card { aspect-ratio: 16 / 9; }
   .polaris-hero-logo { height: clamp(40px, 12vw, 72px); left: 16px; bottom: 16px; }
   .polaris-hero-title { font-size: clamp(18px, 5.5vw, 28px); }
