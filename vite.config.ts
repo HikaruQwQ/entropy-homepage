@@ -8,7 +8,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 type Next = (err?: unknown) => void;
 
-const knownPages = ['/', '/index.html', '/team.html', '/404.html'];
+const knownPages = ['/', '/index.html', '/team.html', '/polaris.html', '/404.html'];
 
 function isHtmlNavigation(req: IncomingMessage): boolean {
   return req.method === 'GET' && (req.headers.accept ?? '').includes('text/html');
@@ -66,6 +66,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         team: fileURLToPath(new URL('./team.html', import.meta.url)),
+        polaris: fileURLToPath(new URL('./polaris.html', import.meta.url)),
         notfound: fileURLToPath(new URL('./404.html', import.meta.url)),
       },
     },

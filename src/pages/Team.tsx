@@ -152,6 +152,7 @@ export function Team() {
         links={[
           { href: 'index.html#home', label: t('home') },
           { href: 'team.html', label: t('team') },
+          { href: 'polaris.html', label: t('polaris') },
         ]}
         langLabel={langLabel}
         onToggleLang={handleToggleLang}

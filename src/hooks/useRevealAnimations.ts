@@ -19,7 +19,7 @@ export function useHomeAnimations() {
     }
 
     const ctx = gsap.context(() => {
-      const heroEls = document.querySelectorAll('.hero-content .reveal');
+      const heroEls = document.querySelectorAll('.hero .reveal');
       gsap
         .timeline({ delay: 0.2 })
         .fromTo(
@@ -29,7 +29,7 @@ export function useHomeAnimations() {
         );
 
       gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
-        if (el.closest('.hero-content')) return;
+        if (el.closest('.hero')) return;
         gsap.fromTo(
           el,
           { opacity: 0, y: 20 },
@@ -57,32 +57,72 @@ export function useHomeAnimations() {
           }
         );
       });
+    });
 
-      gsap.to('.hero-image-wrap img', {
-        yPercent: -10,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 },
+    return () => ctx.revert();
+  }, []);
+}
+
+export function usePolarisAnimations() {
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      applyReducedMotion();
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const heroEls = document.querySelectorAll('.polaris-hero .reveal');
+      gsap
+        .timeline({ delay: 0.2 })
+        .fromTo(
+          heroEls,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.06 }
+        );
+
+      gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
+        if (el.closest('.polaris-hero')) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          }
+        );
       });
 
-      gsap.to('.hero-doing', {
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: '30% top', scrub: true },
+      gsap.utils.toArray<HTMLElement>('.polaris-stats').forEach((grid) => {
+        gsap.fromTo(
+          grid.children,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            ease: 'power3.out',
+            stagger: 0.055,
+            scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
+          }
+        );
       });
 
-      gsap.to('.hero-logo', {
-        yPercent: 20,
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
-      });
-
-      gsap.to('.scroll-hint', {
-        y: 10,
-        duration: 1.2,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
+      gsap.utils.toArray<HTMLElement>('.polaris-origin-content').forEach((wrap) => {
+        gsap.fromTo(
+          wrap.children,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            stagger: 0.06,
+            scrollTrigger: { trigger: wrap, start: 'top 80%', once: true },
+          }
+        );
       });
     });
 
