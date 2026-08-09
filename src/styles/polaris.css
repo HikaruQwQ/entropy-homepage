@@ -199,6 +199,7 @@
 }
 
 @media (max-width: 768px) {
+  :root { --container-pad: 20px; }
   .polaris-page { --polaris-banner-height: 56px; }
   .polaris-banner { padding: 6px 20px; }
   .polaris-hero { padding-top: calc(var(--nav-height) + var(--polaris-banner-height) + 16px); }
@@ -212,4 +213,8 @@
   .polaris-stat-value { font-size: clamp(48px, 13vw, 72px); }
   .polaris-origin-title { font-size: clamp(22px, 6vw, 32px); }
   .polaris-origin-content { font-size: clamp(14px, 4vw, 18px); gap: 1.6em; }
+}
+
+@media (max-width: 375px) {
+  :root { --container-pad: 16px; }
 }
