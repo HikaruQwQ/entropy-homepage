@@ -141,8 +141,10 @@ export function Team() {
   useTeamAnimations();
   const [activeMember, setActiveMember] = useState<string | null>(null);
 
+import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
+
   useEffect(() => {
-    if (!ready) return;
+    if (!ready && !prefersReducedMotion) return;
     const hash = window.location.hash;
     if (!hash || hash === '#') return;
     const target = document.querySelector<HTMLElement>(hash);
