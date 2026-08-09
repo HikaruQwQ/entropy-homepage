@@ -110,7 +110,7 @@ export function usePolarisAnimations() {
         );
       });
 
-      gsap.utils.toArray<HTMLElement>('.polaris-origin-content').forEach((wrap) => {
+      gsap.utils.toArray<HTMLElement>('.polaris-origin-content, .polaris-welcome-content').forEach((wrap) => {
         gsap.fromTo(
           wrap.children,
           { opacity: 0, y: 20 },
@@ -128,6 +128,33 @@ export function usePolarisAnimations() {
 
     return () => ctx.revert();
   }, []);
+}
+
+export function useSponsorGridReveal(ready: boolean) {
+  useEffect(() => {
+    if (!ready || prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>('.polaris-sponsors').forEach((grid) => {
+        gsap.fromTo(
+          grid.children,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            ease: 'power3.out',
+            stagger: 0.055,
+            scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
+          }
+        );
+      });
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => ctx.revert();
+  }, [ready]);
 }
 
 export function useTeamAnimations() {

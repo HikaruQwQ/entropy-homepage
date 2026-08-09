@@ -9,6 +9,35 @@ import { fileURLToPath, URL } from 'node:url';
 type Next = (err?: unknown) => void;
 
 const knownPages = ['/', '/index.html', '/team.html', '/polaris.html', '/404.html'];
+const imageExtensions = ['.avif', '.gif', '.ico', '.jpeg', '.jpg', '.png', '.svg', '.webp'];
+const imageCacheControl = 'public, max-age=259200';
+
+function isImageRequest(req: IncomingMessage): boolean {
+  const urlPath = requestPath(req).toLowerCase();
+  return imageExtensions.some((extension) => urlPath.endsWith(extension));
+}
+
+function imageCacheHeaders(): Plugin {
+  return {
+    name: 'image-cache-headers',
+    configureServer(server) {
+      server.middlewares.use((req: IncomingMessage, res: ServerResponse, next: Next) => {
+        if (isImageRequest(req)) {
+          res.setHeader('Cache-Control', imageCacheControl);
+        }
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use((req: IncomingMessage, res: ServerResponse, next: Next) => {
+        if (isImageRequest(req)) {
+          res.setHeader('Cache-Control', imageCacheControl);
+        }
+        next();
+      });
+    },
+  };
+}
 
 function isHtmlNavigation(req: IncomingMessage): boolean {
   return req.method === 'GET' && (req.headers.accept ?? '').includes('text/html');
@@ -60,7 +89,7 @@ function mpa404Fallback(): Plugin {
 
 export default defineConfig({
   appType: 'mpa',
-  plugins: [react(), mpa404Fallback()],
+  plugins: [react(), mpa404Fallback(), imageCacheHeaders()],
   build: {
     rollupOptions: {
       input: {
