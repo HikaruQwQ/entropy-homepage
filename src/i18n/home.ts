@@ -1,10 +1,10 @@
 export const homeI18n = {
   zh: {
-    home: 'Home', team: 'Team',
+    home: '首页', team: '团队', polaris: '极星黑客松',
     heroLabel: '极星黑客松',
     heroDoing: '我们正在做',
     heroTitle: '一个由中学生创办的黑客松组织\n致力于推动科技创新，促进创新生态发展',
-    heroCta: '加入我们 →',
+    heroCta: '了解此活动 →',
     entropy: '熵序', entropyBody: '一个由中学生组成，结合技术和艺术的多领域团队\n探索未知边界，寻找技术和人文的十字路口',
     tech: '技术', techTitleText: '涉足软件开发、品牌设计等',
     art: '艺术', artBodyText: '致力于探索艺术和技术的融合，团队拥有多位 Designer\n他们在背后构建和谐，巧妙的视觉秩序',
@@ -31,11 +31,11 @@ export const homeI18n = {
     disclaimer: '免责声明 本网站所引用的 AdventureX 商标由杭州宇徐科技有限公司所有，TechCrunch 商标由科技媒体控股国际有限责任公司持有，SegmentFault 商标由武汉复临科技有限公司持有。本网站仅为叙述与说明目的引用上述商标，不用于商业用途，不代表与上述权利人存在任何关联或合作关系。所有商标权利归其各自权利人所有。'
   },
   en: {
-    home: 'Home', team: 'Team',
+    home: 'Home', team: 'Team', polaris: 'Polaris',
     heroLabel: 'Polaris Hackathon',
     heroDoing: 'We are working on',
     heroTitle: 'A hackathon organization founded by students\nDedicated to driving tech innovation and fostering a creative ecosystem',
-    heroCta: 'Join us →',
+    heroCta: 'Learn more →',
     entropy: 'What is _entropy?', entropyBody: '_entropy is a multi-disciplinary team of students combining technology and art\nExploring unknown boundaries, finding the intersection of tech and humanities',
     tech: 'Tech', techTitleText: 'focuses on software development, brand design, and more, with a coder-heavy team',
     art: 'Art', artBodyText: 'explores the fusion of art and technology, with many designers\nBuilding harmonious, subtle visual order behind the scenes',

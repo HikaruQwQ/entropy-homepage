@@ -1,0 +1,16 @@
+import { createRoot } from 'react-dom/client';
+import { Polaris } from './pages/Polaris';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ErrorPage } from './components/ErrorPage';
+import { ToastProvider } from './components/Toast';
+import './styles/shared.css';
+import './styles/polaris.css';
+import './styles/error.css';
+
+createRoot(document.getElementById('root')!).render(
+  <ErrorBoundary fallback={<ErrorPage kind="error" />}>
+    <ToastProvider>
+      <Polaris />
+    </ToastProvider>
+  </ErrorBoundary>
+);

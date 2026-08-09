@@ -55,6 +55,7 @@ export function Home() {
         links={[
           { href: '#home', label: t('home'), sectionId: 'home' },
           { href: 'team.html', label: t('team') },
+          { href: 'polaris.html', label: t('polaris') },
         ]}
         langLabel={langLabel}
         onToggleLang={handleToggleLang}
@@ -84,7 +85,7 @@ export function Home() {
             <p className="hero-eyebrow reveal">{t('heroLabel')}</p>
             <h1 className="hero-title reveal">{t('heroTitle')}</h1>
             <Button asChild className="cta-btn reveal">
-              <a href="mailto:hr@entropy.asia">{t('heroCta')}</a>
+              <a href="polaris.html">{t('heroCta')}</a>
             </Button>
             <div className="scroll-hint reveal">
               <ScrollHintIcon />
