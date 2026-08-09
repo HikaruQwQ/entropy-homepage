@@ -152,7 +152,7 @@ export function Home() {
         <section id="join" className="join-section section-alt">
           <div className="container">
             <Button asChild className="join-card reveal">
-              <a href="mailto:hr@entropy.asia" id="joinCard" aria-label="加入我们">
+              <a href="team.html#become-dreamer" id="joinCard" aria-label="加入我们">
                 <img src="assets/join_bg.png" alt="" className="join-bg" loading="lazy" decoding="async" />
                 <img
                   src="assets/rocket.png"

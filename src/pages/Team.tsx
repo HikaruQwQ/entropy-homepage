@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nav } from '../components/Nav';
 import { Footer } from '../components/Footer';
 import { ScrollTop } from '../components/ScrollTop';
 import { CookieConsent } from '../components/CookieConsent';
 import { Button } from '../components/Button';
+import { ChevronRightIcon } from '../components/icons';
 import { useToast } from '../components/Toast';
 import { useI18n } from '../hooks/useI18n';
 import { useTheme } from '../hooks/useTheme';
 import { useLenis } from '../hooks/useLenis';
 import { useScrollState } from '../hooks/useScrollState';
 import { useTeamAnimations } from '../hooks/useRevealAnimations';
+import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
 import { teamI18n, type TeamI18nKey } from '../i18n/team';
 
 interface TeamMember {
@@ -134,10 +136,23 @@ export function Team() {
   const { t, toggleLang, langLabel, lang, getLangSwitchMessage } = useI18n(teamI18n);
   const { isLight, toggleTheme, toggleLabel } = useTheme();
   const { showToast } = useToast();
-  useLenis();
+  const { ready } = useLenis();
   const { scrolled, showScrollTop } = useScrollState(false);
   useTeamAnimations();
   const [activeMember, setActiveMember] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!ready && !prefersReducedMotion) return;
+    const hash = window.location.hash;
+    if (!hash || hash === '#') return;
+    const target = document.querySelector<HTMLElement>(hash);
+    if (!target) return;
+    const timer = setTimeout(() => {
+      const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop || '0');
+      scrollToTarget(target, -scrollMarginTop);
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [ready]);
 
   const handleToggleLang = () => {
     toggleLang();
@@ -164,6 +179,25 @@ export function Team() {
       <main>
         <section className="team-hero">
           <div className="container">
+            <div className="team-hero-banner reveal">
+              <img
+                className="team-banner-bg"
+                src="assets/join_bg.png"
+                alt=""
+                aria-hidden="true"
+                loading="eager"
+                decoding="async"
+                {...({ fetchpriority: 'high' } as Record<string, string>)}
+              />
+              <img
+                className="team-banner-rocket"
+                src="assets/rocket.png"
+                alt=""
+                aria-hidden="true"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
             <p className="eyebrow reveal">{t('teamLabel')}</p>
             <h1 className="team-hero-title reveal">{t('teamTitle')}</h1>
             <p className="team-hero-body reveal">{t('teamBody')}</p>
@@ -193,11 +227,53 @@ export function Team() {
           </section>
         ))}
 
-        <section className="team-back">
+        <section id="become-dreamer" className="team-contact">
           <div className="container">
-            <Button asChild className="team-back-link reveal">
-              <a href="index.html">{t('backHome')}</a>
-            </Button>
+            <p className="eyebrow reveal">{t('contactEyebrow')}</p>
+            <h2 className="team-contact-title reveal">{t('contactTitle')}</h2>
+            <p className="team-contact-body reveal">{t('contactBody')}</p>
+            <div className="team-contact-grid">
+              <Button asChild className="team-contact-card team-contact-email reveal">
+                <a href="mailto:hr@entropy.asia" aria-label={t('emailAddress')}>
+                  <p className="team-contact-email-label">{t('emailLabel')}</p>
+                  <p className="team-contact-email-address">{t('emailAddress')}</p>
+                </a>
+              </Button>
+              <div className="team-contact-card team-contact-qr reveal">
+                <img
+                  className="team-contact-qr-img"
+                  src="assets/wechat-qrcode.png"
+                  alt={t('qrCaption')}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p className="team-contact-qr-caption">{t('qrCaption')}</p>
+                <a
+                  className="team-contact-qr-link"
+                  href="http://weixin.qq.com/r/mp/4CACGj7EeWMGrXp593Xy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('wechatFollow')}
+                  <ChevronRightIcon />
+                </a>
+              </div>
+              <div className="team-contact-card team-contact-create reveal">
+                <img
+                  className="team-contact-create-bg"
+                  src="assets/creating.png"
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p className="team-contact-create-text">
+                  {t('createLine1')}
+                  <br />
+                  {t('createLine2')}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </main>

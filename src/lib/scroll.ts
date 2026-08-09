@@ -14,12 +14,12 @@ export const prefersReducedMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export function scrollToTarget(target: HTMLElement | number) {
+export function scrollToTarget(target: HTMLElement | number, offset = 0) {
   const l = getLenis();
   if (l) {
-    l.scrollTo(target, { duration: 0.8 });
+    l.scrollTo(target, { offset, duration: 0.8 });
   } else if (typeof target === 'number') {
-    window.scrollTo({ top: target, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    window.scrollTo({ top: target + offset, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   } else {
     target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   }
