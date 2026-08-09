@@ -11,7 +11,7 @@ import { useTheme } from '../hooks/useTheme';
 import { useLenis } from '../hooks/useLenis';
 import { useScrollState } from '../hooks/useScrollState';
 import { useTeamAnimations } from '../hooks/useRevealAnimations';
-import { scrollToTarget } from '../lib/scroll';
+import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
 import { teamI18n, type TeamI18nKey } from '../i18n/team';
 
 interface TeamMember {
@@ -140,8 +140,6 @@ export function Team() {
   const { scrolled, showScrollTop } = useScrollState(false);
   useTeamAnimations();
   const [activeMember, setActiveMember] = useState<string | null>(null);
-
-import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
 
   useEffect(() => {
     if (!ready && !prefersReducedMotion) return;
