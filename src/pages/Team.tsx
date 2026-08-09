@@ -164,9 +164,10 @@ export function Team() {
       <Nav
         logoHref="index.html"
         scrolled={scrolled}
+        activeSection="team"
         links={[
           { href: 'index.html#home', label: t('home') },
-          { href: 'team.html', label: t('team') },
+          { href: 'team.html', label: t('team'), sectionId: 'team' },
           { href: 'polaris.html', label: t('polaris') },
         ]}
         langLabel={langLabel}

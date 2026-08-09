@@ -27,7 +27,7 @@ export function Home() {
   const { isLight, toggleTheme, toggleLabel } = useTheme();
   const { showToast } = useToast();
   useLenis();
-  const { scrolled, showScrollTop, activeSection } = useScrollState(true);
+  const { scrolled, showScrollTop } = useScrollState(false);
   useHomeAnimations();
 
   const handleToggleLang = () => {
@@ -50,7 +50,7 @@ export function Home() {
       <Nav
         logoHref="#home"
         scrolled={scrolled}
-        activeSection={activeSection}
+        activeSection="home"
         onLinkClick={handleNavClick}
         links={[
           { href: '#home', label: t('home'), sectionId: 'home' },
