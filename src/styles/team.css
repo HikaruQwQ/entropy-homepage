@@ -162,7 +162,6 @@
   transform: scale(1.08);
 }
 
-/* 页尾联系区域：邮箱 / 微信二维码 / 创造卡片 三栏 */
 .team-contact {
   scroll-margin-top: calc(var(--nav-height) + clamp(20px, 2vw, 40px));
   padding: clamp(48px, 4.95vw, 95px) 0 clamp(56px, 7.76vw, 149px);
@@ -241,7 +240,6 @@
   color: #FFFFFF;
   white-space: nowrap;
 }
-/* 手机端不展示二维码，整个卡片作为关注链接按钮 */
 .team-contact-qr-link {
   display: none;
   align-items: center;
