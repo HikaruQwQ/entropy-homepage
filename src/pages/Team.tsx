@@ -36,57 +36,19 @@ interface TeamData {
   groups: TeamGroupData[];
 }
 
-interface TeamGroupMeta {
-  id: string;
-  label: string;
-  titleKey: TeamI18nKey;
-  descKey: TeamI18nKey;
-  alt: boolean;
-}
-
 function sortMembers(members: TeamMemberData[]): TeamMemberData[] {
   return [...members].sort((a, b) =>
     a.nickname.zh.localeCompare(b.nickname.zh, 'zh-CN')
   );
 }
 
-const groupMeta: TeamGroupMeta[] = [
-  {
-    id: 'core',
-    label: '/Core Team',
-    titleKey: 'group1Title',
-    descKey: 'group1Desc',
-    alt: true,
-  },
-  {
-    id: 'tech-design',
-    label: '/Tech & Design Team',
-    titleKey: 'group2Title',
-    descKey: 'group2Desc',
-    alt: false,
-  },
-  {
-    id: 'product-events',
-    label: '/Product & Events',
-    titleKey: 'group4Title',
-    descKey: 'group4Desc',
-    alt: false,
-  },
-  {
-    id: 'biz-legal',
-    label: '/Biz & Legal Team',
-    titleKey: 'group3Title',
-    descKey: 'group3Desc',
-    alt: true,
-  },
-  {
-    id: 'consultants',
-    label: '/Consultants',
-    titleKey: 'group5Title',
-    descKey: 'group5Desc',
-    alt: true,
-  },
-];
+const groupKeyMap: Record<string, { titleKey: TeamI18nKey; descKey: TeamI18nKey }> = {
+  core: { titleKey: 'group1Title', descKey: 'group1Desc' },
+  'tech-design': { titleKey: 'group2Title', descKey: 'group2Desc' },
+  'product-events': { titleKey: 'group4Title', descKey: 'group4Desc' },
+  'biz-legal': { titleKey: 'group3Title', descKey: 'group3Desc' },
+  consultants: { titleKey: 'group5Title', descKey: 'group5Desc' },
+};
 
 function TeamCard({
   member,
@@ -153,6 +115,8 @@ export function Team() {
   const { scrolled, showScrollTop } = useScrollState(false);
   const [activeMember, setActiveMember] = useState<string | null>(null);
   const [teamData, setTeamData] = useState<TeamData>({ groups: [] });
+  const [loadError, setLoadError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   const memberCount = teamData.groups.reduce(
     (count, group) => count + group.members.length,
     0
@@ -161,18 +125,24 @@ export function Team() {
 
   useEffect(() => {
     let cancelled = false;
+    setLoadError(false);
     fetch('team.json')
-      .then((res) => (res.ok ? res.json() : { groups: [] }))
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data: TeamData) => {
         if (!cancelled && Array.isArray(data.groups)) {
           setTeamData(data);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        if (!cancelled) setLoadError(true);
+      });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [retryCount]);
 
   useEffect(() => {
     if (!ready && !prefersReducedMotion) return;
@@ -191,8 +161,6 @@ export function Team() {
     toggleLang();
     showToast(getLangSwitchMessage());
   };
-
-  const groupMap = new Map(teamData.groups.map((g) => [g.id, g]));
 
   return (
     <>
@@ -240,16 +208,37 @@ export function Team() {
           </div>
         </section>
 
-        {groupMeta.map((group) => {
-          const data = groupMap.get(group.id);
-          const members = sortMembers(data?.members ?? []);
+        {loadError && (
+          <section className="team-group section-alt">
+            <div className="container">
+              <div className="team-group-header reveal" role="alert">
+                <p className="team-group-label">{t('loadFailed')}</p>
+                <button
+                  type="button"
+                  className="team-group-desc"
+                  onClick={() => setRetryCount((c) => c + 1)}
+                >
+                  {t('retryAction')}
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {teamData.groups.map((group) => {
+          const keys = groupKeyMap[group.id];
+          const members = sortMembers(group.members ?? []);
           return (
             <section key={group.id} className={`team-group${group.alt ? ' section-alt' : ''}`}>
               <div className="container">
                 <div className="team-group-header reveal">
                   <p className="team-group-label">{group.label}</p>
-                  <h2 className="team-group-title">{t(group.titleKey)}</h2>
-                  <p className="team-group-desc">{t(group.descKey)}</p>
+                  {keys && (
+                    <>
+                      <h2 className="team-group-title">{t(keys.titleKey)}</h2>
+                      <p className="team-group-desc">{t(keys.descKey)}</p>
+                    </>
+                  )}
                 </div>
                 <div className="team-grid">
                   {members.map((member) => (
