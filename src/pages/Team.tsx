@@ -115,6 +115,7 @@ export function Team() {
   const { scrolled, showScrollTop } = useScrollState(false);
   const [activeMember, setActiveMember] = useState<string | null>(null);
   const [teamData, setTeamData] = useState<TeamData>({ groups: [] });
+  const [dataSettled, setDataSettled] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const memberCount = teamData.groups.reduce(
@@ -126,6 +127,7 @@ export function Team() {
   useEffect(() => {
     let cancelled = false;
     setLoadError(false);
+    setDataSettled(false);
     fetch('team.json')
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -134,10 +136,14 @@ export function Team() {
       .then((data: TeamData) => {
         if (!cancelled && Array.isArray(data.groups)) {
           setTeamData(data);
+          setDataSettled(true);
         }
       })
       .catch(() => {
-        if (!cancelled) setLoadError(true);
+        if (!cancelled) {
+          setLoadError(true);
+          setDataSettled(true);
+        }
       });
     return () => {
       cancelled = true;
@@ -146,16 +152,18 @@ export function Team() {
 
   useEffect(() => {
     if (!ready && !prefersReducedMotion) return;
+    if (!dataSettled) return;
     const hash = window.location.hash;
     if (!hash || hash === '#') return;
     const target = document.querySelector<HTMLElement>(hash);
     if (!target) return;
     const timer = setTimeout(() => {
-      const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop || '0');
-      scrollToTarget(target, -scrollMarginTop);
+      // Lenis 的 scrollTo 会自动应用 scroll-margin-top，无需手动补偿；
+      // refresh=true 确保数据刚渲染后 Lenis 的滚动上限已更新
+      scrollToTarget(target, 0, true);
     }, 120);
     return () => clearTimeout(timer);
-  }, [ready]);
+  }, [ready, dataSettled]);
 
   const handleToggleLang = () => {
     toggleLang();
