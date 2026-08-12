@@ -283,8 +283,6 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .team-card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
-  .team-card:hover .team-card-sign { opacity: 1; visibility: visible; transition: opacity 250ms var(--ease-out); }
-  .team-card:hover .team-card-avatar img { filter: blur(10px); transform: scale(1.08); }
   .team-contact-email:hover { transform: translateY(-2px); border-color: var(--color-accent); }
   .footer-link:hover { color: var(--color-text); transform: translateY(-1px); }
 }

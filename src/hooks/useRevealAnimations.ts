@@ -157,7 +157,7 @@ export function useSponsorGridReveal(ready: boolean) {
   }, [ready]);
 }
 
-export function useTeamAnimations() {
+export function useTeamAnimations(memberCount = 0) {
   useEffect(() => {
     if (prefersReducedMotion) {
       applyReducedMotion();
@@ -203,8 +203,10 @@ export function useTeamAnimations() {
           }
         );
       });
+
+      ScrollTrigger.refresh();
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [memberCount]);
 }
