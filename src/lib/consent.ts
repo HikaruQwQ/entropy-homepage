@@ -46,7 +46,6 @@ export function initConsentMode(): void {
     wait_for_update: 500,
   });
   gtag('js', new Date());
-  gtag('config', GA_ID);
 }
 
 export const COOKIE_SETTINGS_EVENT = 'entropy:open-cookie-settings';
@@ -70,6 +69,7 @@ export function grantAnalyticsConsent(): void {
 
   if (analyticsLoaded) return;
   analyticsLoaded = true;
+  window.gtag?.('config', GA_ID);
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
