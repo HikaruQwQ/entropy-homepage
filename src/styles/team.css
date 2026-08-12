@@ -227,9 +227,11 @@
   padding: 12px;
   background: #000000;
   border-color: rgba(255, 255, 255, 0.2);
+  container-type: inline-size;
 }
 .team-contact-qr-img {
   width: clamp(150px, 11.46vw, 220px);
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
 }
@@ -239,6 +241,13 @@
   line-height: 1.2;
   color: #FFFFFF;
   white-space: nowrap;
+}
+/* 英文文案更长：字号随卡片宽度（cqw）自适应，极窄时换行而非溢出 */
+[lang='en'] .team-contact-qr-caption {
+  font-size: clamp(10px, 6cqw, 24px);
+  white-space: normal;
+  max-width: 100%;
+  text-align: center;
 }
 .team-contact-qr-link {
   display: none;
