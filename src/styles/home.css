@@ -233,10 +233,7 @@ section { padding: clamp(60px, 8vh, 120px) 0; }
 @media (hover: hover) and (pointer: fine) {
   .polaris-banner:hover { transform: translateY(-2px); opacity: 0.92; }
   .polaris-banner:hover .polaris-banner-cta svg { animation: none; transform: translateX(5px); }
-  .team-entry:hover { transform: translateY(-2px); border-color: var(--color-accent); opacity: 0.95; }
-  .team-entry:hover .avatar-group-item,
-  .team-entry:hover .avatar-group-more { transform: translateX(2px); }
-  .team-entry:hover .avatar-group-item:first-child { transform: translateX(0); }
+  .team-entry:hover { border-color: var(--color-accent); opacity: 0.95; }
   .join-card:hover { transform: translateY(-2px); opacity: 0.96; }
   .footer-link:hover { color: var(--color-text); }
 }

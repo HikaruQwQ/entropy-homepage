@@ -15,11 +15,11 @@ import { scrollToTarget } from '../lib/scroll';
 import { homeI18n } from '../i18n/home';
 
 const entryAvatars = [
-  { src: 'assets/team/mmexport1717774465091.jpg', alt: '杨景铄' },
-  { src: 'assets/team/IMG_0026.JPEG', alt: '许白' },
-  { src: 'assets/team/1786002194999.jpeg', alt: 'Lonely' },
-  { src: 'assets/team/1755440975063.jpeg', alt: 'Cherry Zhu' },
-  { src: 'assets/team/mmexport1786004098313.jpg', alt: 'Evan Tee' },
+  { src: 'assets/team/kevin.jpg', alt: 'KevinYang' },
+  { src: 'assets/team/billw.jpg', alt: 'BillW' },
+  { src: 'assets/team/xubai.JPEG', alt: 'xubai' },
+  { src: 'assets/team/zongtianshuo.jpg', alt: 'zongtianshuo' },
+  { src: 'assets/team/cherry.jpeg', alt: 'Cherry' },
 ];
 
 export function Home() {
