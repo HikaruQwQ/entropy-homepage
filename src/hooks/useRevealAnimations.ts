@@ -135,9 +135,10 @@ export function useSponsorGridReveal(ready: boolean) {
     if (!ready || prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('.polaris-sponsors').forEach((grid) => {
+      gsap.utils.toArray<HTMLElement>('.polaris-sponsors').forEach((wrap) => {
+        const items = wrap.querySelectorAll('.polaris-sponsor-group-title, .polaris-sponsor-card');
         gsap.fromTo(
-          grid.children,
+          items,
           { opacity: 0, y: 16 },
           {
             opacity: 1,
@@ -145,7 +146,7 @@ export function useSponsorGridReveal(ready: boolean) {
             duration: 0.55,
             ease: 'power3.out',
             stagger: 0.055,
-            scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
+            scrollTrigger: { trigger: wrap, start: 'top 85%', once: true },
           }
         );
       });
