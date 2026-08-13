@@ -14,8 +14,13 @@ import { useEffect, useState } from 'react';
 
 interface Sponsor {
   name: string;
-  url: string;
+  url?: string;
   logo: { dark: string; light: string };
+}
+
+interface SponsorCategory {
+  category: { zh: string; en: string };
+  sponsors: Sponsor[];
 }
 
 export function Polaris() {
@@ -26,20 +31,21 @@ export function Polaris() {
   const { scrolled, showScrollTop } = useScrollState(false);
   usePolarisAnimations();
 
-  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+  const [sponsorCategories, setSponsorCategories] = useState<SponsorCategory[]>([]);
   useEffect(() => {
     let cancelled = false;
     fetch('sponsor.json')
       .then((res) => (res.ok ? res.json() : []))
-      .then((data: Sponsor[]) => {
-        if (!cancelled && Array.isArray(data)) setSponsors(data);
+      .then((data: SponsorCategory[]) => {
+        if (!cancelled && Array.isArray(data)) setSponsorCategories(data);
       })
       .catch(() => {});
     return () => {
       cancelled = true;
     };
   }, []);
-  useSponsorGridReveal(sponsors.length > 0);
+  const hasSponsors = sponsorCategories.some((category) => category.sponsors.length > 0);
+  useSponsorGridReveal(hasSponsors);
 
   const handleToggleLang = () => {
     toggleLang();
@@ -225,25 +231,41 @@ export function Polaris() {
                 <img src="assets/polaris27.svg" className="inline-logo" alt="polaris.27" />{' '}
                 <span>{t('partnersP2Post')}</span>
               </p>
-              {sponsors.length > 0 && (
+              {hasSponsors && (
                 <div className="polaris-sponsors">
-                  {sponsors.map((sponsor) => (
-                    <a
-                      key={sponsor.name}
-                      className="polaris-sponsor-card"
-                      href={sponsor.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={sponsor.name}
-                    >
-                      <img
-                        className="polaris-sponsor-logo"
-                        src={isLight ? sponsor.logo.light : sponsor.logo.dark}
-                        alt={sponsor.name}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
+                  {sponsorCategories.map((category) => (
+                    <div className="polaris-sponsor-group" key={category.category.zh}>
+                      <h3 className="polaris-sponsor-group-title">{category.category[lang]}</h3>
+                      <div className="polaris-sponsor-grid">
+                        {category.sponsors.map((sponsor) => {
+                          const logo = (
+                            <img
+                              className="polaris-sponsor-logo"
+                              src={isLight ? sponsor.logo.light : sponsor.logo.dark}
+                              alt={sponsor.name}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          );
+                          return sponsor.url ? (
+                            <a
+                              key={sponsor.name}
+                              className="polaris-sponsor-card"
+                              href={sponsor.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={sponsor.name}
+                            >
+                              {logo}
+                            </a>
+                          ) : (
+                            <div key={sponsor.name} className="polaris-sponsor-card" aria-label={sponsor.name}>
+                              {logo}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
