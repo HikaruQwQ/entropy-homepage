@@ -54,10 +54,6 @@ export function Polaris() {
 
   return (
     <div className="polaris-page">
-      <div className="polaris-banner">
-        <span className="polaris-banner-text">{t('previewBanner')}</span>
-      </div>
-
       <Nav
         logoHref="index.html"
         scrolled={scrolled}
@@ -73,6 +69,10 @@ export function Polaris() {
         themeLabel={toggleLabel}
         onToggleTheme={toggleTheme}
       />
+
+      <div className="polaris-banner">
+        <span className="polaris-banner-text">{t('previewBanner')}</span>
+      </div>
 
       <main>
         <section className="polaris-hero">
