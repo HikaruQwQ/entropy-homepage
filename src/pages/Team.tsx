@@ -37,9 +37,7 @@ interface TeamData {
   groups: TeamGroupData[];
 }
 
-// 成员数据在构建时从 public/team.json 打包进产物，页面打开即渲染，无运行时请求。
-// public/team.json 同时作为静态资源保留：旧缓存的 Team bundle 仍会 fetch('team.json')，
-// 待缓存过期后可考虑移除。
+// 构建时内联自 public/team.json；该文件同时服务旧缓存 bundle 的 fetch('team.json')，缓存过期前勿删
 const teamData: TeamData = teamJson;
 
 function sortMembers(members: TeamMemberData[]): TeamMemberData[] {
@@ -133,8 +131,7 @@ export function Team() {
     const target = document.querySelector<HTMLElement>(hash);
     if (!target) return;
     const timer = setTimeout(() => {
-      // Lenis 的 scrollTo 会自动应用 scroll-margin-top，无需手动补偿；
-      // refresh=true 确保 Lenis 的滚动上限已更新
+      // Lenis 的 scrollTo 自动应用 scroll-margin-top；refresh=true 确保滚动上限已更新
       scrollToTarget(target, 0, true);
     }, 120);
     return () => clearTimeout(timer);
