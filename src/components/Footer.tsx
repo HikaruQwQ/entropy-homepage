@@ -2,10 +2,10 @@ import { XIcon } from './icons';
 import { Button } from './Button';
 import { requestOpenCookieSettings } from '../lib/consent';
 
-export function Footer({ disclaimer, cookieSettingsLabel }: { disclaimer: string; cookieSettingsLabel?: string }) {
-  const labelMatch = disclaimer.match(/^(免责声明|Disclaimer)[:：]?\s*/);
+export function Footer({ disclaimer, cookieSettingsLabel }: { disclaimer?: string; cookieSettingsLabel?: string }) {
+  const labelMatch = disclaimer?.match(/^(免责声明|Disclaimer)[:：]?\s*/);
   const disclaimerLabel = labelMatch ? labelMatch[1] : '';
-  const disclaimerContent = labelMatch ? disclaimer.slice(labelMatch[0].length) : disclaimer;
+  const disclaimerContent = disclaimer ? (labelMatch ? disclaimer.slice(labelMatch[0].length) : disclaimer) : '';
 
   return (
     <footer className="footer">
@@ -33,12 +33,14 @@ export function Footer({ disclaimer, cookieSettingsLabel }: { disclaimer: string
               <XIcon />
             </a>
           </div>
-          <div className="footer-right">
-            <p className="footer-disclaimer">
-              <span className="footer-disclaimer-label">{disclaimerLabel}</span>
-              <span className="footer-disclaimer-content">{disclaimerContent}</span>
-            </p>
-          </div>
+          {disclaimer && (
+            <div className="footer-right">
+              <p className="footer-disclaimer">
+                <span className="footer-disclaimer-label">{disclaimerLabel}</span>
+                <span className="footer-disclaimer-content">{disclaimerContent}</span>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </footer>

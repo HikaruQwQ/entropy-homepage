@@ -2,10 +2,10 @@
 
 .polaris-banner {
   position: fixed;
-  top: 0;
+  top: calc(var(--nav-height) - 1px);
   left: 0;
   right: 0;
-  z-index: 101;
+  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +19,6 @@
   text-align: center;
 }
 
-.polaris-page .nav { top: var(--polaris-banner-height); }
 .polaris-page .nav-overlay { padding-top: calc(var(--nav-height) + var(--polaris-banner-height)); }
 
 .polaris-hero {

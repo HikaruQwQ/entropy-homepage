@@ -175,7 +175,7 @@ export function Home() {
         </section>
       </main>
 
-      <Footer disclaimer={t('disclaimer')} cookieSettingsLabel={t('cookieSettings')} />
+      <Footer cookieSettingsLabel={t('cookieSettings')} />
       <ScrollTop visible={showScrollTop} />
       <CookieConsent lang={lang} />
     </>
