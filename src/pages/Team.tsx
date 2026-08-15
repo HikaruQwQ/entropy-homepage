@@ -13,6 +13,7 @@ import { useScrollState } from '../hooks/useScrollState';
 import { useTeamAnimations } from '../hooks/useRevealAnimations';
 import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
 import { teamI18n, type TeamI18nKey } from '../i18n/team';
+import teamJson from '../../public/team.json';
 
 interface LocalizedText {
   zh: string;
@@ -35,6 +36,9 @@ interface TeamGroupData {
 interface TeamData {
   groups: TeamGroupData[];
 }
+
+// 构建时内联自 public/team.json；该文件同时服务旧缓存 bundle 的 fetch('team.json')，缓存过期前勿删
+const teamData: TeamData = teamJson;
 
 function sortMembers(members: TeamMemberData[]): TeamMemberData[] {
   return [...members].sort((a, b) =>
@@ -114,10 +118,6 @@ export function Team() {
   const { ready } = useLenis();
   const { scrolled, showScrollTop } = useScrollState(false);
   const [activeMember, setActiveMember] = useState<string | null>(null);
-  const [teamData, setTeamData] = useState<TeamData>({ groups: [] });
-  const [dataSettled, setDataSettled] = useState(false);
-  const [loadError, setLoadError] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
   const memberCount = teamData.groups.reduce(
     (count, group) => count + group.members.length,
     0
@@ -125,45 +125,17 @@ export function Team() {
   useTeamAnimations(memberCount);
 
   useEffect(() => {
-    let cancelled = false;
-    setLoadError(false);
-    setDataSettled(false);
-    fetch('team.json')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data: TeamData) => {
-        if (!cancelled && Array.isArray(data.groups)) {
-          setTeamData(data);
-          setDataSettled(true);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setLoadError(true);
-          setDataSettled(true);
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [retryCount]);
-
-  useEffect(() => {
     if (!ready && !prefersReducedMotion) return;
-    if (!dataSettled) return;
     const hash = window.location.hash;
     if (!hash || hash === '#') return;
     const target = document.querySelector<HTMLElement>(hash);
     if (!target) return;
     const timer = setTimeout(() => {
-      // Lenis 的 scrollTo 会自动应用 scroll-margin-top，无需手动补偿；
-      // refresh=true 确保数据刚渲染后 Lenis 的滚动上限已更新
+      // Lenis 的 scrollTo 自动应用 scroll-margin-top；refresh=true 确保滚动上限已更新
       scrollToTarget(target, 0, true);
     }, 120);
     return () => clearTimeout(timer);
-  }, [ready, dataSettled]);
+  }, [ready]);
 
   const handleToggleLang = () => {
     toggleLang();
@@ -215,23 +187,6 @@ export function Team() {
             <p className="team-hero-body reveal">{t('teamBody')}</p>
           </div>
         </section>
-
-        {loadError && (
-          <section className="team-group section-alt">
-            <div className="container">
-              <div className="team-group-header reveal" role="alert">
-                <p className="team-group-label">{t('loadFailed')}</p>
-                <button
-                  type="button"
-                  className="team-group-desc"
-                  onClick={() => setRetryCount((c) => c + 1)}
-                >
-                  {t('retryAction')}
-                </button>
-              </div>
-            </div>
-          </section>
-        )}
 
         {teamData.groups.map((group) => {
           const keys = groupKeyMap[group.id];
