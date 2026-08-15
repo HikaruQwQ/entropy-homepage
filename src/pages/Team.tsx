@@ -13,7 +13,7 @@ import { useScrollState } from '../hooks/useScrollState';
 import { useTeamAnimations } from '../hooks/useRevealAnimations';
 import { prefersReducedMotion, scrollToTarget } from '../lib/scroll';
 import { teamI18n, type TeamI18nKey } from '../i18n/team';
-import teamJson from '../data/team.json';
+import teamJson from '../../public/team.json';
 
 interface LocalizedText {
   zh: string;
@@ -37,7 +37,9 @@ interface TeamData {
   groups: TeamGroupData[];
 }
 
-// 成员数据在构建时打包进产物，页面打开即渲染，无运行时请求
+// 成员数据在构建时从 public/team.json 打包进产物，页面打开即渲染，无运行时请求。
+// public/team.json 同时作为静态资源保留：旧缓存的 Team bundle 仍会 fetch('team.json')，
+// 待缓存过期后可考虑移除。
 const teamData: TeamData = teamJson;
 
 function sortMembers(members: TeamMemberData[]): TeamMemberData[] {
