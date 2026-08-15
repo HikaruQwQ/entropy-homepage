@@ -76,9 +76,7 @@ export const polarisI18n = {
     benefitHotelSmall: 'Eligible participants', benefitHotelBig: 'Free hotel stays',
     benefitTrainSmall: 'Eligible participants', benefitTrainBig: 'Travel subsidies provided',
     benefitFoodBig: 'Unlimited snacks for everyone\nThree meals a day',
-    welcomeClosing: 'We don’t need you to create a product as successful as that other "Bonjour!" in just three days—all we ask is that you enjoy the process of creation. This isn’t really a "competition" in the true sense; it’s a place where you can truly be yourself and let your instincts run free. You can code from dawn till dusk, brainstorming wildly; or you can stay up all night, talking tech ideals with a group of like-minded people. Even if you need to step away from the event for a while, that’s perfectly fine—we’ll keep your spot reserved and wait for your return.
-
-',
+    welcomeClosing: 'We don’t need you to create a product as successful as that other "Bonjour!" in just three days—all we ask is that you enjoy the process of creation. This isn’t really a "competition" in the true sense; it’s a place where you can truly be yourself and let your instincts run free. You can code from dawn till dusk, brainstorming wildly; or you can stay up all night, talking tech ideals with a group of like-minded people. Even if you need to step away from the event for a while, that’s perfectly fine—we’ll keep your spot reserved and wait for your return.',
     partnersEyebrow: 'Partners',
     partnersTitle: 'Fellow Travelers',
     partnersP1: 'We could not run this event without enterprises, teams, and organizations from all walks of life that share our ideals and beliefs.',
