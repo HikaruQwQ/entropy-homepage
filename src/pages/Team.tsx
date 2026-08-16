@@ -37,13 +37,39 @@ interface TeamData {
   groups: TeamGroupData[];
 }
 
-// 构建时内联自 public/team.json；该文件同时服务旧缓存 bundle 的 fetch('team.json')，缓存过期前勿删
 const teamData: TeamData = teamJson;
 
+const PINYIN_INITIAL_BOUNDS: Array<[string, string]> = [
+  ['a', '阿'], ['b', '八'], ['c', '嚓'], ['d', '哒'], ['e', '蛾'],
+  ['f', '发'], ['g', '噶'], ['h', '哈'], ['j', '击'], ['k', '喀'],
+  ['l', '垃'], ['m', '妈'], ['n', '拿'], ['o', '噢'], ['p', '啪'],
+  ['q', '期'], ['r', '然'], ['s', '撒'], ['t', '塌'], ['w', '挖'],
+  ['x', '昔'], ['y', '压'], ['z', '匝'],
+];
+
+function pinyinInitial(char: string): string {
+  let initial = '';
+  for (const [letter, bound] of PINYIN_INITIAL_BOUNDS) {
+    if (char.localeCompare(bound, 'zh-CN') >= 0) initial = letter;
+    else break;
+  }
+  return initial;
+}
+
+function memberInitial(member: TeamMemberData): string {
+  const first = member.nickname.zh.charAt(0);
+  return /[a-zA-Z]/.test(first) ? first.toLowerCase() : pinyinInitial(first);
+}
+
 function sortMembers(members: TeamMemberData[]): TeamMemberData[] {
-  return [...members].sort((a, b) =>
-    a.nickname.zh.localeCompare(b.nickname.zh, 'zh-CN')
-  );
+  return members
+    .map((member, index) => ({ member, initial: memberInitial(member), index }))
+    .sort((a, b) => {
+      if (a.initial !== b.initial) return a.initial < b.initial ? -1 : 1;
+      const byPinyin = a.member.nickname.zh.localeCompare(b.member.nickname.zh, 'zh-CN');
+      return byPinyin !== 0 ? byPinyin : a.index - b.index;
+    })
+    .map(({ member }) => member);
 }
 
 const groupKeyMap: Record<string, { titleKey: TeamI18nKey; descKey: TeamI18nKey }> = {
