@@ -52,6 +52,11 @@
           }
         },
         {
+          "nickname": { "zh": "黑啤", "en": "黑啤" },
+          "avatar": "assets/team/heipi.jpg",
+          "signature": { "zh": "热爱可抵岁月漫长", "en": "Love Can Make the Long Years Feel Short" }
+        },
+        {
           "nickname": { "zh": "Lonely", "en": "Lonely" },
           "avatar": "assets/team/lonely.jpeg",
           "signature": {
@@ -80,6 +85,14 @@
           "nickname": { "zh": "MilkSU", "en": "MilkSU" },
           "avatar": "assets/team/milksu.png",
           "signature": { "zh": "System Security Hunter", "en": "System Security Hunter" }
+        },
+        {
+          "nickname": { "zh": "御坂鱼板", "en": "Misaka Mikoto" },
+          "avatar": "assets/team/misaka.jpg",
+          "signature": {
+            "zh": "身陷四百零四种网络病态，沉腻在四百二十九次频率依赖，未曾想五百零三拒绝更改。",
+            "en": "Caught up in 404 forms of online addiction, mired in 429 instances of frequency dependence, I never imagined there would be 503 refusals to change."
+          }
         }
       ]
     },
@@ -88,6 +101,27 @@
       "label": "/Biz & Legal Team",
       "alt": true,
       "members": [
+        {
+          "nickname": { "zh": "Aoi M", "en": "Aoi M" },
+          "avatar": "assets/team/aoim.jpg",
+          "signature": {
+            "zh": "// Hi, can you hear me //",
+            "en": "// Hi, can you hear me //"
+          }
+        },
+        {
+          "nickname": { "zh": "CacheTide", "en": "CacheTide" },
+          "avatar": "assets/team/cachetide.jpg",
+          "signature": {
+            "zh": "请问今天要吃点美食吗",
+            "en": "Would you like to try some delicious food today?"
+          }
+        },
+        {
+          "nickname": { "zh": "椰羊", "en": "椰羊" },
+          "avatar": "assets/team/ganyu.png",
+          "signature": { "zh": "", "en": "" }
+        },
         {
           "nickname": { "zh": "杨景铄", "en": "KevinYang" },
           "avatar": "assets/team/kevin.jpg",
