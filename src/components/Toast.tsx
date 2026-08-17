@@ -41,7 +41,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             onOpenChange={(open) => {
               if (!open) closeToast(toast.id);
             }}
-            onSwipeEnd={() => closeToast(toast.id)}
+            onSwipeEnd={() => { closeToast(toast.id); }}
             onAnimationEnd={() => {
               if (!toast.open) removeToast(toast.id);
             }}

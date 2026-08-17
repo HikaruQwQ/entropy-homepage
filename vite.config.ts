@@ -57,12 +57,12 @@ function mpa404Fallback(): Plugin {
     configureServer(server) {
       const { root, publicDir } = server.config;
       server.middlewares.use(async (req: IncomingMessage, res: ServerResponse, next: Next) => {
-        if (!isHtmlNavigation(req)) return next();
+        if (!isHtmlNavigation(req)) { next(); return; }
         const urlPath = requestPath(req);
-        if (knownPages.includes(urlPath)) return next();
-        if (publicDir && fs.existsSync(path.join(publicDir, urlPath))) return next();
+        if (knownPages.includes(urlPath)) { next(); return; }
+        if (publicDir && fs.existsSync(path.join(publicDir, urlPath))) { next(); return; }
         const source = path.join(root, '404.html');
-        if (!fs.existsSync(source)) return next();
+        if (!fs.existsSync(source)) { next(); return; }
         const html = fs.readFileSync(source, 'utf-8');
         res.statusCode = 404;
         res.setHeader('Content-Type', 'text/html');
@@ -76,9 +76,9 @@ function mpa404Fallback(): Plugin {
         if (!isHtmlNavigation(req)) return next();
         const urlPath = requestPath(req);
         if (knownPages.includes(urlPath)) return next();
-        if (fs.existsSync(path.join(outDir, urlPath))) return next();
+        if (fs.existsSync(path.join(outDir, urlPath))) { next(); return; }
         const file = path.join(outDir, '404.html');
-        if (!fs.existsSync(file)) return next();
+        if (!fs.existsSync(file)) { next(); return; }
         res.statusCode = 404;
         res.setHeader('Content-Type', 'text/html');
         res.end(fs.readFileSync(file, 'utf-8'));

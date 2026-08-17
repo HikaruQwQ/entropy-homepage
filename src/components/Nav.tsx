@@ -47,7 +47,7 @@ export function Nav({
       if (!e.matches) setMenuOpen(false);
     };
     mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
+    return () => { mq.removeEventListener('change', onChange); };
   }, []);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export function Nav({
           ?.querySelector<HTMLAnchorElement>('.nav-overlay-link')
           ?.focus({ preventScroll: true });
       });
-      return () => cancelAnimationFrame(id);
+      return () => { cancelAnimationFrame(id); };
     }
     if (wasOpenRef.current) {
       wasOpenRef.current = false;
@@ -127,7 +127,7 @@ export function Nav({
             href={logoHref}
             className="nav-logo"
             aria-label="Entropy"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => { setMenuOpen(false); }}
           >
             <img src="assets/entropy_logo.svg" alt="Entropy" />
           </a>
@@ -166,7 +166,7 @@ export function Nav({
               aria-label={menuOpen ? '关闭菜单' : '打开菜单'}
               aria-expanded={menuOpen}
               aria-controls="nav-overlay"
-              onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => { setMenuOpen((open) => !open); }}
             >
               <span></span>
               <span></span>
