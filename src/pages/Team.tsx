@@ -99,7 +99,7 @@ function TeamCard({
   return (
     <div
       className={`team-card reveal${active ? ' is-active' : ''}${interactive ? ' has-sign' : ''}`}
-      onClick={interactive ? () => onToggle(active ? null : member.avatar) : undefined}
+      onClick={interactive ? () => { onToggle(active ? null : member.avatar); } : undefined}
       onKeyDown={
         interactive
           ? (e) => {
@@ -121,7 +121,7 @@ function TeamCard({
             alt={nickname}
             loading="lazy"
             decoding="async"
-            onError={() => setImgFailed(true)}
+            onError={() => { setImgFailed(true); }}
           />
         )}
       </div>
@@ -160,7 +160,7 @@ export function Team() {
       // Lenis 的 scrollTo 自动应用 scroll-margin-top；refresh=true 确保滚动上限已更新
       scrollToTarget(target, 0, true);
     }, 120);
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); };
   }, [ready]);
 
   const handleToggleLang = () => {

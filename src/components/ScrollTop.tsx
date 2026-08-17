@@ -7,7 +7,7 @@ export function ScrollTop({ visible }: { visible: boolean }) {
     <Button
       className={`scroll-top${visible ? ' visible' : ''}`}
       aria-label="回到顶部"
-      onClick={() => scrollToTarget(0)}
+      onClick={() => { scrollToTarget(0); }}
     >
       <ArrowUpIcon />
     </Button>

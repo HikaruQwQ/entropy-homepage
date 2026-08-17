@@ -15,7 +15,7 @@ export function CookieConsent({ lang }: { lang: Lang }) {
   useEffect(() => {
     initConsentMode();
     if (choice === 'accepted') grantAnalyticsConsent();
-    return () => window.clearTimeout(timerRef.current);
+    return () => { window.clearTimeout(timerRef.current); };
   }, [choice]);
 
   const showBanner = choice === null || visible;
@@ -31,7 +31,7 @@ export function CookieConsent({ lang }: { lang: Lang }) {
       setVisible(true);
     };
     window.addEventListener(COOKIE_SETTINGS_EVENT, onOpen);
-    return () => window.removeEventListener(COOKIE_SETTINGS_EVENT, onOpen);
+    return () => { window.removeEventListener(COOKIE_SETTINGS_EVENT, onOpen); };
   }, []);
 
   if (!showBanner) return null;
@@ -66,10 +66,10 @@ export function CookieConsent({ lang }: { lang: Lang }) {
           </p>
         </div>
         <div className="cookie-banner-actions">
-          <Button className="cookie-banner-btn cookie-banner-decline" onClick={() => decide('declined')}>
+          <Button className="cookie-banner-btn cookie-banner-decline" onClick={() => { decide('declined'); }}>
             {t.decline}
           </Button>
-          <Button className="cookie-banner-btn cookie-banner-accept" onClick={() => decide('accepted')}>
+          <Button className="cookie-banner-btn cookie-banner-accept" onClick={() => { decide('accepted'); }}>
             {t.accept}
           </Button>
         </div>
