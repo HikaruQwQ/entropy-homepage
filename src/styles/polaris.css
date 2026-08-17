@@ -321,6 +321,10 @@
   max-height: 45%;
 }
 
+.polaris-sponsor-logo[alt='Moonshot48'] {
+  max-height: 60%;
+}
+
 @media (min-width: 769px) {
   .polaris-sponsor-card {
     flex-basis: clamp(180px, 15.62vw, 300px);

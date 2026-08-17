@@ -20,6 +20,14 @@
           "dark": "assets/sponsors/cloud/volcengine-dark.svg",
           "light": "assets/sponsors/cloud/volcengine-light.svg"
         }
+      },
+      {
+        "name": "ModelScope",
+        "url": "https://www.modelscope.cn/",
+        "logo": {
+          "dark": "assets/sponsors/cloud/modelscope-dark.svg",
+          "light": "assets/sponsors/cloud/modelscope-light.svg"
+        }
       }
     ]
   },
@@ -31,10 +39,26 @@
     "sponsors": [
       {
         "name": "DUNION",
-        "url": "",
+        "url": "https://dunion.net/",
         "logo": {
           "dark": "assets/sponsors/community/dunion-dark.svg",
           "light": "assets/sponsors/community/dunion-light.svg"
+        }
+      },
+      {
+        "name": "OpenBuild",
+        "url": "https://www.openbuild.xyz/",
+        "logo": {
+          "dark": "assets/sponsors/web3/openbuild-dark.svg",
+          "light": "assets/sponsors/web3/openbuild-light.svg"
+        }
+      },
+      {
+        "name": "Moonshot48",
+        "url": "https://www.msadream.cn/",
+        "logo": {
+          "dark": "assets/sponsors/community/moonshot.svg",
+          "light": "assets/sponsors/community/moonshot.svg"
         }
       }
     ]
